@@ -6,8 +6,15 @@
         <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
 
         <div class="logo-box">
-            <a href="{{ route('index') }}" aria-label="logo image"><img src="{{asset('assets/images/resources/logo-2.png')}}" width="150"
-                    alt="" /></a>
+            @php
+                $header = (array) \App\Models\Ejournal\Setting::getValue('header', []);
+                $logoPath = data_get($header, 'logo_path');
+                $logoUrl = $logoPath ? asset('storage/' . ltrim($logoPath, '/')) : asset('assets/images/resources/logoMed.png');
+                $logoAlt = (string) data_get($header, 'logo_alt', config('app.name', 'E-Journal'));
+            @endphp
+            <a href="{{ route('index') }}" aria-label="logo image">
+                <img src="{{ $logoUrl }}" width="150" alt="{{ $logoAlt }}" />
+            </a>
         </div>
         <!-- /.logo-box -->
         <div class="mobile-nav__container"></div>
