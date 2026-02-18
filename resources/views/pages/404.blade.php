@@ -1,5 +1,5 @@
 @extends('layouts.breadcrumbs')
-@section('title', '404 Error || Freshflow || Freshflow Laravel Template ')
+@section('title', '404 Error')
 @push('styles')
 <link rel="stylesheet" href="{{asset('assets/css/module-css/error-page.css')}}"/>
 @endpush

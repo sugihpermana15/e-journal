@@ -1,5 +1,5 @@
 @extends('layouts.breadcrumbs')
-@section('title', 'Coming Soon || Freshflow || Freshflow Laravel Template')
+@section('title', 'Coming Soon')
 @push('styles')
 <link rel="stylesheet" href="{{asset('assets/css/module-css/coming-soon.css')}}"/>
 @endpush

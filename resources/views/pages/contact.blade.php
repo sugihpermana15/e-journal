@@ -1,5 +1,5 @@
 @extends('layouts.breadcrumbs')
-@section('title', 'Contact || Freshflow || Freshflow Laravel Template')
+@section('title', 'Contact')
 @push('styles')
 <link rel="stylesheet" href="{{asset('assets/css/module-css/contact.css')}}"/>
 <link rel="stylesheet" href="{{ asset('assets/css/module-css/google-map.css') }}" />

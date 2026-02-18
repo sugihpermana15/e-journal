@@ -1,5 +1,5 @@
 @extends('layouts.breadcrumbs')
-@section('title', 'Residential Cleaning || Freshflow || Freshflow Laravel Template')
+@section('title', 'Residential Cleaning')
 @push('styles')
 <link rel="stylesheet" href="{{asset('assets/css/module-css/services.css')}}"/>
  <link rel="stylesheet" href="{{asset('assets/css/module-css/project.css')}}"/>

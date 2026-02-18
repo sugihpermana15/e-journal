@@ -1,13 +1,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Home One || Freshflow || Freshflow Laravel Template')</title>
-
     @php
+        $appName = (string) config('app.name', 'E-Journal');
+
+        $pageTitleRaw = trim($__env->yieldContent('title'));
+        $pageTitle = $pageTitleRaw !== '' ? ($pageTitleRaw . ' || ' . $appName) : $appName;
+
         $headerSettings = (array) \App\Models\Ejournal\Setting::getValue('header', []);
         $faviconPath = data_get($headerSettings, 'favicon_path');
         $faviconUrl = $faviconPath ? asset('storage/' . ltrim($faviconPath, '/')) : null;
     @endphp
+
+    <title>{{ $pageTitle }}</title>
 
     <!-- Favicons -->
     @if($faviconUrl)
@@ -21,7 +26,7 @@
     @endif
     <link rel="manifest" href="{{ asset('assets/images/favicons/site.webmanifest') }}">
 
-    <meta name="description" content="Freshflow Laravel Template ">
+    <meta name="description" content="{{ $appName }}">
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

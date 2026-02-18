@@ -13,10 +13,16 @@
         <div class="mobile-nav__container"></div>
         <!-- /.mobile-nav__container -->
 
+        @php
+            $appUrlHost = parse_url((string) config('app.url'), PHP_URL_HOST);
+            $defaultContactEmail = $appUrlHost ? ('info@' . $appUrlHost) : 'info@example.com';
+            $contactEmail = (string) (config('mail.from.address') ?: $defaultContactEmail);
+        @endphp
+
         <ul class="mobile-nav__contact list-unstyled">
             <li>
                 <i class="fa fa-envelope"></i>
-                <a href="mailto:needhelp@packageName__.com">needhelp@Freshflow.com</a>
+                <a href="mailto:{{ $contactEmail }}">{{ $contactEmail }}</a>
             </li>
             <li>
                 <i class="fas fa-phone"></i>
