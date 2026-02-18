@@ -214,7 +214,10 @@
 }
 
 .banner-one__img img {
-  width: auto;
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
   animation: topBottom 3s ease-in-out infinite;
 }
 
@@ -237,7 +240,10 @@
 }
 
 .banner-one__google-rating-img img {
-  width: auto;
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
 }
 
 .banner-one__google-rating-box {
