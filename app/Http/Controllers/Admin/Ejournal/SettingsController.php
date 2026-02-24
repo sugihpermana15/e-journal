@@ -25,7 +25,20 @@ class SettingsController extends Controller
         $validated = $request->validated();
 
         return DB::transaction(function () use ($request, $validated) {
-            $home = Arr::get($validated, 'home', []);
+            $incomingHome = Arr::get($validated, 'home', []);
+            if (!is_array($incomingHome)) {
+                $incomingHome = [];
+            }
+
+            // Preserve previously saved settings that aren't posted by the form.
+            // File inputs (e.g. banner image) do not send the existing path, so
+            // saving from request-only would unintentionally erase older uploads.
+            $existingHome = Setting::getValue('home', []);
+            if (!is_array($existingHome)) {
+                $existingHome = [];
+            }
+
+            $home = array_replace_recursive($existingHome, $incomingHome);
 
             // Home "Featured Publications" now comes from Journals (DB), not settings.
             // Never persist any legacy featured configuration even if posted.
