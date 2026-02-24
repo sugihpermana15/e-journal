@@ -148,12 +148,18 @@
   position: relative;
   display: block;
   max-width: 56px;
+  width: 56px;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   overflow: hidden;
 }
 
 .banner-one__satisfied-partner-img img {
   width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
   border-radius: 50%;
   border: 2px solid var(--Freshflow-white);
 }
@@ -243,13 +249,19 @@
   position: relative;
   display: block;
   margin-bottom: 11px;
+  max-width: 93px;
+  width: 100%;
+  aspect-ratio: 93 / 32;
+  overflow: hidden;
 }
 
 .banner-one__google-rating-img img {
   display: block;
   max-width: 100%;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 .banner-one__google-rating-box {

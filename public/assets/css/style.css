@@ -1616,6 +1616,15 @@ ul {
   display: flex;
 }
 
+.mobile-nav__content .logo-box img {
+  display: block;
+  max-height: 55px;
+  max-width: 200px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
 .mobile-nav__close {
   position: absolute;
   top: 20px;

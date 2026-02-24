@@ -511,6 +511,7 @@
     position: relative;
     display: block;
     margin-bottom: 25px;
+    aspect-ratio: 280 / 250;
     overflow: hidden;
     border-radius: 12px;
 }
@@ -537,12 +538,17 @@
 
 .about-two__img-1 img {
     width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
     border-radius: 12px;
 }
 
 .about-two__img-2 {
     position: relative;
     display: block;
+    aspect-ratio: 280 / 312;
     overflow: hidden;
     border-radius: 12px;
 }
@@ -569,6 +575,10 @@
 
 .about-two__img-2 img {
     width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
     border-radius: 12px;
 }
 
@@ -584,6 +594,7 @@
     position: relative;
     display: block;
     margin-bottom: 25px;
+    aspect-ratio: 297 / 313;
     overflow: hidden;
     border-radius: 12px;
 }
@@ -610,12 +621,17 @@
 
 .about-two__img-3 img {
     width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
     border-radius: 12px;
 }
 
 .about-two__img-4 {
     position: relative;
     display: block;
+    aspect-ratio: 297 / 313;
     overflow: hidden;
     border-radius: 12px;
 }
@@ -642,6 +658,10 @@
 
 .about-two__img-4 img {
     width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
     border-radius: 12px;
 }
 
