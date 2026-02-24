@@ -1,7 +1,7 @@
 @extends('layouts.breadcrumbs')
 @section('title', 'Book Publishing || Med Open Press')
 @push('styles')
-    <link rel="stylesheet" href="{{asset('assets/css/module-css/services.css')}}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/module-css/services.css') }}?v={{ filemtime(public_path('assets/css/module-css/services.css')) }}"/>
     <link rel="stylesheet" href="{{asset('assets/css/module-css/project.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/css/module-css/faq.css')}}"/>
 @endpush

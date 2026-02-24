@@ -2,7 +2,7 @@
 @section('title', 'Publishing Services || Med Open Press')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('assets/css/module-css/services.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/module-css/services.css') }}?v={{ filemtime(public_path('assets/css/module-css/services.css')) }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/module-css/sliding-text.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/module-css/process.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/module-css/faq.css') }}" />

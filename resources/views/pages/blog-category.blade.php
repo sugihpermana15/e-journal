@@ -1,7 +1,7 @@
 @extends('layouts.breadcrumbs')
 @section('title', ($category['label'] ?? 'Scientific News Category') . ' || Med Open Press')
 @push('styles')
-<link rel="stylesheet" href="{{asset('assets/css/module-css/blog.css')}}"/>
+<link rel="stylesheet" href="{{ asset('assets/css/module-css/blog.css') }}?v={{ filemtime(public_path('assets/css/module-css/blog.css')) }}"/>
 @endpush
 @php
     $bodyClass = 'custom-cursor';

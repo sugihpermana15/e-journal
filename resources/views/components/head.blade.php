@@ -125,7 +125,7 @@
 
     <!-- Module most usese Styles -->
     <link rel="stylesheet" href="{{ asset('assets/css/module-css/page-header.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/module-css/banner.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/module-css/banner.css') }}?v={{ filemtime(public_path('assets/css/module-css/banner.css')) }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/module-css/slider.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/module-css/newsletter.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/module-css/footer.css') }}" />
@@ -139,7 +139,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/module-css/brand.css') }}" />
  
     <!-- Template Styles -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ filemtime(public_path('assets/css/style.css')) }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <!-- Additional Styles -->
     @stack('styles')

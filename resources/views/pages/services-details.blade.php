@@ -2,7 +2,7 @@
 @section('title', ($serviceTitle ?? 'Service Details') . ' || Med Open Press')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('assets/css/module-css/services.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/module-css/services.css') }}?v={{ filemtime(public_path('assets/css/module-css/services.css')) }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/module-css/awards.css') }}" />
 @endpush
 

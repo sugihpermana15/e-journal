@@ -1,7 +1,7 @@
 @extends('layouts.breadcrumbs')
 @section('title', 'Testimonials Carousel')
 @push('styles')
-<link rel="stylesheet" href="{{asset('assets/css/module-css/testimonial.css')}}"/>
+<link rel="stylesheet" href="{{ asset('assets/css/module-css/testimonial.css') }}?v={{ filemtime(public_path('assets/css/module-css/testimonial.css')) }}"/>
 @endpush
 @php
     $bodyClass = 'custom-cursor';

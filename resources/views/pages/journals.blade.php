@@ -2,7 +2,7 @@
 @section('title', 'Journals || Med Open Press')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/module-css/about.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/css/module-css/about.css') }}?v={{ filemtime(public_path('assets/css/module-css/about.css')) }}" />
 <link rel="stylesheet" href="{{ asset('assets/css/module-css/project.css') }}" />
 @endpush
 

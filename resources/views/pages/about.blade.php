@@ -1,9 +1,9 @@
 @extends('layouts.breadcrumbs')
 @section('title', 'About || Med Open Press')
 @push('styles')
-<link rel="stylesheet" href="{{asset('assets/css/module-css/about.css')}}"/>
+<link rel="stylesheet" href="{{ asset('assets/css/module-css/about.css') }}?v={{ filemtime(public_path('assets/css/module-css/about.css')) }}"/>
 <link rel="stylesheet" href="{{asset('assets/css/module-css/team.css')}}"/>
-<link rel="stylesheet" href="{{asset('assets/css/module-css/testimonial.css')}}"/>
+<link rel="stylesheet" href="{{ asset('assets/css/module-css/testimonial.css') }}?v={{ filemtime(public_path('assets/css/module-css/testimonial.css')) }}"/>
 @endpush
 @php
     $bodyClass = 'custom-cursor';

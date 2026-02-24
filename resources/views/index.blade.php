@@ -1,14 +1,14 @@
 @extends('layouts.layout1')
 @section('title', 'Home || Med Open Press')
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/module-css/services.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/css/module-css/services.css') }}?v={{ filemtime(public_path('assets/css/module-css/services.css')) }}" />
 <link rel="stylesheet" href="{{ asset('assets/css/module-css/project.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/css/module-css/team.css') }}" />
-<link rel="stylesheet" href="{{ asset('assets/css/module-css/testimonial.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/css/module-css/testimonial.css') }}?v={{ filemtime(public_path('assets/css/module-css/testimonial.css')) }}" />
 <link rel="stylesheet" href="{{ asset('assets/css/module-css/pricing.css') }}" />
-<link rel="stylesheet" href="{{ asset('assets/css/module-css/about.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/css/module-css/about.css') }}?v={{ filemtime(public_path('assets/css/module-css/about.css')) }}" />
 <link rel="stylesheet" href="{{ asset('assets/css/module-css/contact.css') }}" />
-<link rel="stylesheet" href="{{ asset('assets/css/module-css/blog.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/css/module-css/blog.css') }}?v={{ filemtime(public_path('assets/css/module-css/blog.css')) }}" />
 @endpush
 @section('content')
 

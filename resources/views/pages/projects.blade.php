@@ -3,7 +3,7 @@
 @push('styles')
 <link rel="stylesheet" href="{{asset('assets/css/module-css/project.css')}}"/>
 {{-- blog.css here for only pagination --}}
-<link rel="stylesheet" href="{{asset('assets/css/module-css/blog.css')}}"/> 
+<link rel="stylesheet" href="{{ asset('assets/css/module-css/blog.css') }}?v={{ filemtime(public_path('assets/css/module-css/blog.css')) }}"/> 
 @endpush
 @php
     $bodyClass = 'custom-cursor';
