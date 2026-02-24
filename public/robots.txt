@@ -2,4 +2,4 @@ User-agent: *
 Disallow:
 
 # Sitemap
-Sitemap: /sitemap.xml
+Sitemap: https://medopenpresspublishing.com/sitemap.xml
