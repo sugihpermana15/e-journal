@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'google_tag_manager' => [
+        // Override via .env: GTM_ID=GTM-XXXXXXX
+        'id' => env('GTM_ID', 'GTM-NJCCM679'),
+    ],
+
 ];

@@ -115,6 +115,77 @@ Route::get('lang/{locale}', [PagesController::class, 'set_locale'])
 Route::get('contact', [PagesController::class, 'contact'])->name('contact');
 
 
+/////////// SEO (Sitemap)
+Route::get('sitemap.xml', function () {
+    $urls = [
+        [
+            'loc' => url('/'),
+            'changefreq' => 'weekly',
+            'priority' => '1.0',
+        ],
+        [
+            'loc' => route('about'),
+            'changefreq' => 'monthly',
+            'priority' => '0.8',
+        ],
+        [
+            'loc' => route('services'),
+            'changefreq' => 'monthly',
+            'priority' => '0.9',
+        ],
+        [
+            'loc' => route('journals'),
+            'changefreq' => 'weekly',
+            'priority' => '0.9',
+        ],
+        [
+            'loc' => route('blog'),
+            'changefreq' => 'daily',
+            'priority' => '0.9',
+        ],
+        [
+            'loc' => route('contact'),
+            'changefreq' => 'monthly',
+            'priority' => '0.7',
+        ],
+    ];
+
+    $posts = \App\Models\BlogPost::query()
+        ->where('is_published', true)
+        ->orderByDesc('published_at')
+        ->limit(500)
+        ->get(['slug', 'updated_at', 'published_at']);
+
+    foreach ($posts as $post) {
+        $lastMod = $post->updated_at ?? $post->published_at;
+        $urls[] = [
+            'loc' => route('blog-details', ['slug' => $post->slug]),
+            'lastmod' => $lastMod ? $lastMod->toAtomString() : null,
+            'changefreq' => 'weekly',
+            'priority' => '0.7',
+        ];
+    }
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+
+    foreach ($urls as $u) {
+        $xml .= "  <url>\n";
+        $xml .= '    <loc>' . e($u['loc']) . '</loc>' . "\n";
+        if (!empty($u['lastmod'])) {
+            $xml .= '    <lastmod>' . e($u['lastmod']) . '</lastmod>' . "\n";
+        }
+        $xml .= '    <changefreq>' . e($u['changefreq']) . '</changefreq>' . "\n";
+        $xml .= '    <priority>' . e($u['priority']) . '</priority>' . "\n";
+        $xml .= "  </url>\n";
+    }
+
+    $xml .= '</urlset>';
+
+    return response($xml, 200)->header('Content-Type', 'application/xml; charset=UTF-8');
+});
+
+
 ///////////// 404 or not found
 Route::fallback(function () {
     return response()->view('pages.404', [], 404);
