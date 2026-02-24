@@ -1,12 +1,12 @@
 @extends('layouts.breadcrumbs')
-@section('title', ($category['label'] ?? 'Blog Category') . ' || Med Open Press')
+@section('title', ($category['label'] ?? 'Scientific News Category') . ' || Med Open Press')
 @push('styles')
 <link rel="stylesheet" href="{{asset('assets/css/module-css/blog.css')}}"/>
 @endpush
 @php
     $bodyClass = 'custom-cursor';
-    $title = $category['label'] ?? 'Blog Category';
-    $subtitle = $category['label'] ?? 'Blog Details';
+    $title = $category['label'] ?? 'Scientific News Category';
+    $subtitle = $category['label'] ?? 'Scientific News';
 @endphp
 
 @section('content')
@@ -20,7 +20,7 @@
                         </div>
 
                         <div class="blog-details__content">
-                            <h3 class="blog-details__title">{{ $category['label'] ?? 'Blog Category' }}</h3>
+                            <h3 class="blog-details__title">{{ $category['label'] ?? 'Scientific News Category' }}</h3>
 
                             <ul class="blog-details__meta-list list-unstyled">
                                 <li>
@@ -144,4 +144,6 @@
             </div>
         </div>
     </section>
+
+    <x-footer2 />
 @endsection

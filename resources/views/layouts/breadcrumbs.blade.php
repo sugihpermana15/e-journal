@@ -31,19 +31,8 @@
                             <li><a href="{{ route('index') }}">Home</a></li>
                             <li><span class="icon-arrow-right"></span></li>
 
-                            @if (request()->routeIs([
-                                    'residential-cleaning',
-                                    'commercial-cleaning',
-                                    'deep-cleaning',
-                                    'office-cleaning',
-                                    'sanitizing-mopping',
-                                ]))
-                                <li><a href="{{ route('services') }}">Services</a></li>
-                                <li><span class="icon-arrow-right"></span></li>
-                            @endif
-
-                            @if (request()->routeIs(['blog-carousel', 'blog-list', 'blog-details', 'blog-category']))
-                                <li><a href="{{ route('blog') }}">Blog</a></li>
+                            @if (request()->routeIs(['blog', 'blog-details', 'blog-category']))
+                                <li><a href="{{ route('blog') }}">Scientific News</a></li>
                                 <li><span class="icon-arrow-right"></span></li>
                             @endif
 

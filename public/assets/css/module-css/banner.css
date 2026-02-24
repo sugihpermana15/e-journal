@@ -211,14 +211,20 @@
 .banner-one__img {
   position: relative;
   display: block;
+  max-width: 526px;
+  width: 100%;
+  aspect-ratio: 526 / 621;
+  overflow: hidden;
+  animation: topBottom 3s ease-in-out infinite;
 }
 
 .banner-one__img img {
   display: block;
   max-width: 100%;
   width: 100%;
-  height: auto;
-  animation: topBottom 3s ease-in-out infinite;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .banner-one__google-rating {

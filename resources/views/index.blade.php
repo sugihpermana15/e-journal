@@ -107,8 +107,8 @@
 
     $blogTagline = (string) data_get($home, 'blog.tagline', 'OUR INSIGHT');
     $blogHeadingHtml = data_get($home, 'blog.heading_html');
-    $blogButtonText = (string) data_get($home, 'blog.button_text', 'View All Blogs');
-    $blogButtonUrl = (string) data_get($home, 'blog.button_url', route('blog-list'));
+    $blogButtonText = (string) data_get($home, 'blog.button_text', 'View All Scientific News');
+    $blogButtonUrl = (string) data_get($home, 'blog.button_url', route('blog'));
 @endphp
 
 <x-strickyHeader />
@@ -1034,7 +1034,7 @@
                         $text = (string) data_get($t, 'text', '');
                         $rating = (int) data_get($t, 'rating', 5);
                         $rating = max(0, min(5, $rating));
-                        $linkUrl = (string) data_get($t, 'link_url', route('testimonials'));
+                        $linkUrl = (string) data_get($t, 'link_url', route('about'));
                         $imgRaw = data_get($t, 'image');
                         $defaultIndex = min(((int) $i) + 1, 4);
                         $imgUrl = $imgRaw ? asset('storage/' . ltrim($imgRaw, '/')) : asset('assets/images/testimonial/testimonial-1-' . $defaultIndex . '.jpg');
@@ -1076,7 +1076,7 @@
                     </div>
                     <div class="testimonial-one__client-info">
                         <div class="testimonial-one__client-content">
-                            <h4 class="testimonial-one__client-name"><a href="{{ route('testimonials') }}">Emily
+                                <h4 class="testimonial-one__client-name"><a href="{{ route('about') }}">Emily
                                     Carter</a></h4>
                             <p class="testimonial-one__client-sub-title">Business Owner</p>
                         </div>
@@ -1106,7 +1106,7 @@
                     </div>
                     <div class="testimonial-one__client-info">
                         <div class="testimonial-one__client-content">
-                            <h4 class="testimonial-one__client-name"><a href="{{ route('testimonials') }}">Michael
+                                <h4 class="testimonial-one__client-name"><a href="{{ route('about') }}">Michael
                                     Brown</a></h4>
                             <p class="testimonial-one__client-sub-title">Financial Analyst</p>
                         </div>
@@ -1136,7 +1136,7 @@
                     </div>
                     <div class="testimonial-one__client-info">
                         <div class="testimonial-one__client-content">
-                            <h4 class="testimonial-one__client-name"><a href="{{ route('testimonials') }}">Sarah
+                                <h4 class="testimonial-one__client-name"><a href="{{ route('about') }}">Sarah
                                     Thompson</a></h4>
                             <p class="testimonial-one__client-sub-title">Marketing Manager</p>
                         </div>
@@ -1166,7 +1166,7 @@
                     </div>
                     <div class="testimonial-one__client-info">
                         <div class="testimonial-one__client-content">
-                            <h4 class="testimonial-one__client-name"><a href="{{ route('testimonials') }}">John
+                                <h4 class="testimonial-one__client-name"><a href="{{ route('about') }}">John
                                     Peterson</a></h4>
                             <p class="testimonial-one__client-sub-title">Software Developer </p>
                         </div>
@@ -1386,7 +1386,7 @@
                     <div class="col-12">
                         <div class="blog-one__single" style="padding: 30px;">
                             <h3 class="blog-one__title">Belum ada artikel</h3>
-                            <p class="blog-one__text">Konten blog akan tampil di sini setelah admin mempublikasikan postingan.</p>
+                            <p class="blog-one__text">Konten Scientific News akan tampil di sini setelah admin mempublikasikan postingan.</p>
                         </div>
                     </div>
                 @endif

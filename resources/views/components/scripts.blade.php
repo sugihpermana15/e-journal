@@ -1,4 +1,5 @@
 <script src="{{ asset('assets/js/jquery-latest.js') }}"></script>
+<script src="{{ asset('assets/js/jquery-migrate.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/js/jarallax.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>

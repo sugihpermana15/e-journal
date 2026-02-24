@@ -175,7 +175,7 @@
                         'sub_title' => 'Rigorous and transparent!',
                         'text' => "The peer review process was thorough and constructive.\nThe editorial communication was clear, timely, and professional.",
                         'rating' => 5,
-                        'link_url' => route('testimonials'),
+                        'link_url' => route('about'),
                     ],
                     [
                         'name' => 'Michael Brown',
@@ -184,7 +184,7 @@
                         'sub_title' => 'Efficient and dependable!',
                         'text' => "From submission to decision, the workflow was well-managed.\nThe guidance helped us improve the manuscript substantially.",
                         'rating' => 5,
-                        'link_url' => route('testimonials'),
+                        'link_url' => route('about'),
                     ],
                     [
                         'name' => 'Sarah Thompson',
@@ -193,7 +193,7 @@
                         'sub_title' => 'High-quality editorial support!',
                         'text' => "Copyediting and production were excellent.\nThe final publication was polished, readable, and consistent.",
                         'rating' => 5,
-                        'link_url' => route('testimonials'),
+                        'link_url' => route('about'),
                     ],
                     [
                         'name' => 'John Peterson',
@@ -202,7 +202,7 @@
                         'sub_title' => 'A great publishing partner!',
                         'text' => "We value the ethical standards and transparency.\nOpen access distribution helped our work reach a broader audience.",
                         'rating' => 5,
-                        'link_url' => route('testimonials'),
+                        'link_url' => route('about'),
                     ],
                 ],
             ],
@@ -216,8 +216,8 @@
             'blog' => [
                 'tagline' => 'OUR INSIGHT',
                 'heading_html' => 'Discover Insights and <span>Tips </span> <br><span>in Our Latest Articles</span>',
-                'button_text' => 'View All Blogs',
-                'button_url' => '/blog-list',
+                'button_text' => 'View All Scientific News',
+                'button_url' => '/blog',
                 'cards' => [
                     [
                         'day' => '05',
@@ -256,8 +256,8 @@
 
             'blog_sidebar' => [
                 'search' => [
-                    'title' => 'Search Blogs',
-                    'text' => 'Search Explore a world of diverse blog topics to stay informed and inspired.',
+                    'title' => 'Search Scientific News',
+                    'text' => 'Search Explore a world of diverse scientific news topics to stay informed and inspired.',
                     'placeholder' => 'Search here',
                 ],
                 'categories' => [
@@ -282,7 +282,7 @@
                 ],
                 'subscribe' => [
                     'title' => 'Subscribe',
-                    'text' => 'Subscribe to our newsletter to get daily updates about our blogs.',
+                    'text' => 'Subscribe to our newsletter to get daily updates about our scientific news.',
                     'placeholder' => 'Enter Your Email',
                     'button_text' => 'Subscribe',
                 ],
@@ -1325,7 +1325,7 @@
 
                             <div class="col-12" id="section-services-detail">
                                 <h6 class="mb-1">Services Detail Page</h6>
-                                <div class="text-muted small">This controls the public <code>/services-detail</code> page.</div>
+                                <div class="text-muted small">This controls the public <code>/services/{slug}</code> page.</div>
                             </div>
 
                             <div class="col-12">
@@ -1641,13 +1641,13 @@
                             <hr class="my-2" />
 
                             <div class="col-12" id="section-blog-cards">
-                                <h6 class="mb-1">Blog Cards</h6>
+                                <h6 class="mb-1">Scientific News Cards</h6>
                                 <div class="text-muted small">Configure 4 cards. Tags use | separator.</div>
                             </div>
 
                             <div class="col-12">
                                 <div class="border rounded p-3">
-                                    <div class="fw-semibold mb-2">Blog Heading</div>
+                                    <div class="fw-semibold mb-2">Scientific News Heading</div>
                                     <div class="row g-3">
                                         <div class="col-12 col-md-4">
                                             <label class="form-label">Tagline</label>
@@ -1659,11 +1659,11 @@
                                         </div>
                                         <div class="col-12 col-md-4">
                                             <label class="form-label">Button Text</label>
-                                            <input class="form-control" name="home[blog][button_text]" value="{{ old('home.blog.button_text', data_get($home, 'blog.button_text', 'View All Blogs')) }}">
+                                            <input class="form-control" name="home[blog][button_text]" value="{{ old('home.blog.button_text', data_get($home, 'blog.button_text', 'View All Scientific News')) }}">
                                         </div>
                                         <div class="col-12 col-md-8">
                                             <label class="form-label">Button URL</label>
-                                            <input class="form-control" name="home[blog][button_url]" value="{{ old('home.blog.button_url', data_get($home, 'blog.button_url', '/blog-list')) }}">
+                                            <input class="form-control" name="home[blog][button_url]" value="{{ old('home.blog.button_url', data_get($home, 'blog.button_url', '/blog')) }}">
                                         </div>
                                     </div>
                                 </div>
@@ -2115,7 +2115,7 @@
                                             </div>
                                             <div class="col-12 col-md-8">
                                                 <label class="form-label">Link URL</label>
-                                                <input class="form-control" name="home[testimonials][items][{{ $i }}][link_url]" value="{{ old('home.testimonials.items.' . $i . '.link_url', data_get($t, 'link_url', route('testimonials'))) }}">
+                                                <input class="form-control" name="home[testimonials][items][{{ $i }}][link_url]" value="{{ old('home.testimonials.items.' . $i . '.link_url', data_get($t, 'link_url', route('about'))) }}">
                                             </div>
                                             <div class="col-12 col-md-6">
                                                 <label class="form-label">Image Upload</label>

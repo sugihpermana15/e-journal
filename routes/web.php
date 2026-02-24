@@ -22,95 +22,26 @@ Route::get('/', [HomeController::class, 'index'])
 Route::get('about', [PagesController::class, 'about'])->name('about');
 
 
+////////// services
+Route::get('services', [PagesController::class, 'services'])->name('services');
+Route::get('services/{slug}', [PagesController::class, 'services_detail'])->name('services-detail');
+
+// Legacy service detail URLs (used by default admin settings)
+Route::get('book-publishing', [PagesController::class, 'services_detail'])->defaults('slug', 'book-publishing');
+Route::get('journal-publication', [PagesController::class, 'services_detail'])->defaults('slug', 'journal-publication');
+Route::get('ipr-management', [PagesController::class, 'services_detail'])->defaults('slug', 'ipr-management');
+Route::get('custom-publishing', [PagesController::class, 'services_detail'])->defaults('slug', 'custom-publishing');
+Route::get('distribution-licensing', [PagesController::class, 'services_detail'])->defaults('slug', 'distribution-licensing');
+
+
 ////////// journals
 Route::get('journals', [PagesController::class, 'journals'])->name('journals');
 
 
-///////// Pages
-Route::get('team', [PagesController::class, 'team'])
-    ->name('team');
-Route::get('team-details', [PagesController::class, 'team_details'])
-    ->name('team-details');
-Route::get('projects', [PagesController::class, 'projects'])
-    ->name('projects');
-Route::get('projects-carousel', [PagesController::class, 'projects_carousel'])
-    ->name('projects-carousel');
-Route::get('project-details', [PagesController::class, 'project_details'])
-    ->name('project-details');
-Route::get('testimonials', [PagesController::class, 'testimonials'])
-    ->name('testimonials');
-Route::get('testimonials-carousel', [PagesController::class, 'testimonials_carousel'])
-    ->name('testimonials-carousel');
-Route::get('pricing', [PagesController::class, 'pricing'])
-    ->name('pricing');
-Route::get('pricing-carousel', [PagesController::class, 'pricing_carousel'])
-    ->name('pricing-carousel');
-Route::get('gallery', [PagesController::class, 'gallery'])
-    ->name('gallery');    
-Route::get('faq', [PagesController::class, 'faq'])
-    ->name('faq');
-Route::get('404', [PagesController::class, 'not_found'])
-    ->name('404');
-Route::get('coming-soon', [PagesController::class, 'coming_soon'])
-->name('coming-soon');
-
-
-//////////// Services
-Route::get('services', [PagesController::class, 'services'])
-    ->name('services');
-Route::get('residential-cleaning', [PagesController::class, 'residential_cleaning'])
-    ->name('residential-cleaning');
-Route::get('commercial-cleaning', [PagesController::class, 'commercial_cleaning'])
-    ->name('commercial-cleaning');
-Route::get('deep-cleaning', [PagesController::class, 'deep_cleaning'])
-    ->name('deep-cleaning');
-Route::get('office-cleaning', [PagesController::class, 'office_cleaning'])
-    ->name('office-cleaning');
-Route::get('sanitizing-mopping', [PagesController::class, 'sanitizing_mopping'])
-    ->name('sanitizing-mopping');
-
-Route::get('services-detail', [PagesController::class, 'services_detail'])
-    ->name('services-detail');
-
-Route::get('book-publishing', [PagesController::class, 'book_publishing'])
-    ->name('book-publishing');
-Route::get('journal-publication', [PagesController::class, 'journal_publication'])
-    ->name('journal-publication');
-Route::get('ipr-management', [PagesController::class, 'ipr_management'])
-    ->name('ipr-management');
-Route::get('custom-publishing', [PagesController::class, 'custom_publishing'])
-    ->name('custom-publishing');
-Route::get('distribution-licensing', [PagesController::class, 'distribution_licensing'])
-    ->name('distribution-licensing');
-
-
-//////////// Shop
-Route::get('product', [PagesController::class, 'product'])
-    ->name('product');
-Route::get('products-right', [PagesController::class, 'products_right'])
-    ->name('products-right');
-Route::get('products-left', [PagesController::class, 'products_left'])
-    ->name('products-left');
-Route::get('product-details', [PagesController::class, 'product_details'])
-    ->name('product-details');
-Route::get('cart', [PagesController::class, 'cart'])
-    ->name('cart');
-Route::get('checkout', [PagesController::class, 'checkout'])
-    ->name('checkout');
-Route::get('wishlist', [PagesController::class, 'wishlist'])
-    ->name('wishlist');
-
-
-////////// account
-// Admin login (used by header sidebar Login link)
+////////// account (admin auth)
 Route::get('login', [AdminAuthController::class, 'showLogin'])->name('login');
 Route::post('login', [AdminAuthController::class, 'login'])->name('login.perform');
 Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
-
-// Keep the old public login page accessible (if needed)
-Route::get('account/login', [PagesController::class, 'login'])->name('account.login');
-
-Route::get('sign-up', [PagesController::class, 'sign_up'])->name('sign-up');
 
 // Admin area
 Route::prefix('admin')
@@ -171,10 +102,6 @@ Route::prefix('admin')
 /////////// Blog
 Route::get('blog', [PagesController::class, 'blog'])
     ->name('blog');
-Route::get('blog-carousel', [PagesController::class, 'blog_carousel'])
-    ->name('blog-carousel');
-Route::get('blog-list', [PagesController::class, 'blog_list'])
-    ->name('blog-list');
 Route::get('blog-details/{slug?}', [PagesController::class, 'blog_details'])
     ->name('blog-details');
 
@@ -189,6 +116,6 @@ Route::get('contact', [PagesController::class, 'contact'])->name('contact');
 
 
 ///////////// 404 or not found
-
-Route::fallback([PagesController::class, 'not_found'])
-    ->name('not-found');
+Route::fallback(function () {
+    return response()->view('pages.404', [], 404);
+})->name('not-found');

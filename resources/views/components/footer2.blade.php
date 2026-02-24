@@ -70,28 +70,27 @@
                                                         Us</a></li>
                                                 <li><a href="{{ route('contact') }}"> <span class="icon-next"></span>
                                                         Contact</a></li>
-                                                <li><a href="{{ route('faq') }}"> <span class="icon-next"></span> FAQs
-                                                        Page</a>
-                                                </li>
-                                                <li><a href="{{ route('blog-list') }}"> <span class="icon-next"></span>
-                                                        Our Blogs</a></li>
+                                                <li><a href="{{ route('journals') }}"> <span class="icon-next"></span>
+                                                        Journals</a></li>
+                                                <li><a href="{{ route('blog') }}"> <span class="icon-next"></span>
+                                                    Our Scientific News</a></li>
                                             </ul>
                                         </div>
                                     </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
                                         <div class="footer-widget-two__services-links">
-                                            <h4 class="footer-widget-two__title">Our Services</h4>
+                                            <h4 class="footer-widget-two__title">Explore</h4>
                                             <ul class="footer-widget-two__quick-links-list list-unstyled">
-                                            <li><a href="{{ route('services') }}"> <span class="icon-next"></span>
-                                                Scientific Journal Publication</a></li>
-                                            <li><a href="{{ route('services') }}"> <span class="icon-next"></span>
-                                                Book Publishing</a></li>
-                                            <li><a href="{{ route('services') }}"> <span class="icon-next"></span>
-                                                Peer Review & Editorial Support</a></li>
-                                            <li><a href="{{ route('services') }}"> <span class="icon-next"></span>
-                                                Open Access & Compliance</a></li>
-                                            <li><a href="{{ route('services') }}"> <span class="icon-next"></span>
-                                                Distribution & Licensing</a></li>
+                                                <li><a href="{{ route('about') }}"> <span class="icon-next"></span>
+                                                        About</a></li>
+                                                <li><a href="{{ route('journals') }}"> <span class="icon-next"></span>
+                                                        Journals</a></li>
+                                                <li><a href="{{ route('blog') }}"> <span class="icon-next"></span>
+                                                    Scientific News</a></li>
+                                                <li><a href="{{ route('contact') }}"> <span class="icon-next"></span>
+                                                        Contact</a></li>
+                                                <li><a href="{{ route('login') }}"> <span class="icon-next"></span>
+                                                        Admin Login</a></li>
                                             </ul>
                                         </div>
                                     </div>

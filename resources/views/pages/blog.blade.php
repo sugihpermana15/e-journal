@@ -1,12 +1,12 @@
 @extends('layouts.breadcrumbs')
-@section('title', 'Blog || Med Open Press')
+@section('title', 'Scientific News || Med Open Press')
 @push('styles')
 <link rel="stylesheet" href="{{asset('assets/css/module-css/blog.css')}}"/>
 @endpush
 @php
     $bodyClass = 'custom-cursor';
-    $title = 'Blog';
-    $subtitle = 'Blog';
+    $title = 'Scientific News';
+    $subtitle = 'Scientific News';
 
     $home = (array) ($homeSettings ?? []);
     $blogSidebar = (array) data_get($home, 'blog_sidebar', []);
@@ -106,13 +106,13 @@
                                         </li>
                                     </ul>
                                     <div class="blog-list__tag">
-                                        <a href="#">#Blog</a>
+                                        <a href="#">#ScientificNews</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="blog-list__content">
                                 <h3 class="blog-list__title">Belum ada artikel</h3>
-                                <p class="blog-list__text">Konten blog akan tampil di sini setelah admin menambahkan postingan.</p>
+                                <p class="blog-list__text">Konten Scientific News akan tampil di sini setelah admin menambahkan postingan.</p>
                                 <div class="blog-list__btn-and-client-info">
                                     <div class="blog-list__btn-box">
                                         <a href="{{ route('blog') }}" class="thm-btn">Refresh<span><i class="icon-diagonal-arrow"></i></span></a>
@@ -154,9 +154,9 @@
                             <div class="sidebar__title-box">
                                 <div class="sidebar__title-shape"></div>
                                 <div class="sidebar__title-shape-2"></div>
-                                <h3 class="sidebar__title">{{ data_get($blogSidebarSearch, 'title', 'Search Blogs') }}</h3>
+                                <h3 class="sidebar__title">{{ data_get($blogSidebarSearch, 'title', 'Search Scientific News') }}</h3>
                             </div>
-                            <p class="sidebar__search-text">{{ data_get($blogSidebarSearch, 'text', 'Search Explore a world of diverse blog topics to stay informed and inspired.') }}</p>
+                            <p class="sidebar__search-text">{{ data_get($blogSidebarSearch, 'text', 'Search Explore a world of diverse scientific news topics to stay informed and inspired.') }}</p>
                             <form action="#" class="sidebar__search-form">
                                 <input type="search" placeholder="{{ data_get($blogSidebarSearch, 'placeholder', 'Search here') }}">
                                 <button type="submit"><i class="icon-search"></i></button>
@@ -256,7 +256,7 @@
                                 <div class="sidebar__title-shape-2"></div>
                                 <h3 class="sidebar__title">{{ data_get($blogSidebarSubscribe, 'title', 'Subscribe') }}</h3>
                             </div>
-                            <p class="sidebar__subscribe-text">{{ data_get($blogSidebarSubscribe, 'text', 'Subscribe to our newsletter to get daily updates about our blogs.') }}</p>
+                            <p class="sidebar__subscribe-text">{{ data_get($blogSidebarSubscribe, 'text', 'Subscribe to our newsletter to get daily updates about our scientific news.') }}</p>
                             <form action="#" class="sidebar__newsletter-form">
                                 <div class="sidebar__newsletter-form-input-box">
                                     <div class="sidebar__newsletter-form-input-icon">
