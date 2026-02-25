@@ -8,6 +8,7 @@ use App\Models\Ejournal\Setting;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class HeaderController extends Controller
 {
@@ -25,7 +26,19 @@ class HeaderController extends Controller
         $validated = $request->validated();
 
         return DB::transaction(function () use ($request, $validated) {
-            $header = Arr::get($validated, 'header', []);
+            $incomingHeader = Arr::get($validated, 'header', []);
+            if (!is_array($incomingHeader)) {
+                $incomingHeader = [];
+            }
+
+            // Preserve previously saved settings that aren't posted by the form.
+            // File inputs (logo/favicon/breadcrumb bg) do not send the existing path.
+            $existingHeader = Setting::getValue('header', []);
+            if (!is_array($existingHeader)) {
+                $existingHeader = [];
+            }
+
+            $header = array_replace_recursive($existingHeader, $incomingHeader);
 
             $header = $this->normalizeHeaderSettings($header);
 
@@ -39,8 +52,24 @@ class HeaderController extends Controller
                 Arr::set($header, 'favicon_path', $path);
             }
 
+            // Breadcrumb background image (page header)
+            $removeBreadcrumbBg = (bool) Arr::get($incomingHeader, 'breadcrumb_bg_remove', false);
+            if ($removeBreadcrumbBg) {
+                $oldPath = Arr::get($existingHeader, 'breadcrumb_bg_path');
+                if (is_string($oldPath) && $oldPath !== '') {
+                    Storage::disk('public')->delete($oldPath);
+                }
+                Arr::forget($header, 'breadcrumb_bg_path');
+            }
+            if ($request->hasFile('header.breadcrumb_bg_file')) {
+                $path = $request->file('header.breadcrumb_bg_file')->store('ejournal/breadcrumbs', 'public');
+                Arr::set($header, 'breadcrumb_bg_path', $path);
+            }
+
             Arr::forget($header, 'logo_file');
             Arr::forget($header, 'favicon_file');
+            Arr::forget($header, 'breadcrumb_bg_file');
+            Arr::forget($header, 'breadcrumb_bg_remove');
 
             Setting::putValue('header', $header);
 

@@ -44,6 +44,11 @@
 
         $faviconPath = data_get($header, 'favicon_path');
         $faviconUrl = $faviconPath ? asset('storage/' . ltrim($faviconPath, '/')) : asset('assets/images/favicons/favicon-32x32.png');
+
+        $breadcrumbBgPath = data_get($header, 'breadcrumb_bg_path');
+        $breadcrumbBgUrl = $breadcrumbBgPath
+            ? asset('storage/' . ltrim($breadcrumbBgPath, '/'))
+            : asset('assets/images/backgrounds/page-header-bg.jpg');
     @endphp
 
     @if (session('success'))
@@ -136,6 +141,31 @@
                                 <label class="form-label">Favicon image</label>
                                 <input type="file" class="form-control" name="header[favicon_file]" accept="image/*">
                                 <div class="form-text">Max 1MB. Stored in public storage (<code>/storage/...</code>). If the image doesn't load, ensure <code>php artisan storage:link</code> is set on the server.</div>
+                            </div>
+
+                            <div class="col-12 mt-2">
+                                <hr class="my-2">
+                            </div>
+
+                            <div class="col-12">
+                                <h6 class="mb-1">Breadcrumbs Background</h6>
+                                <div class="text-muted small">Controls the background image used in the public page header (breadcrumbs area).</div>
+                            </div>
+
+                            <div class="col-12 col-md-3">
+                                <img src="{{ $breadcrumbBgUrl }}" alt="" style="width: 100%; height: 80px; object-fit: cover; border-radius: 6px;" />
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <label class="form-label">Background image</label>
+                                <input type="file" class="form-control" name="header[breadcrumb_bg_file]" accept="image/*">
+                                <div class="form-text">Max 4MB. Stored in public storage (<code>/storage/...</code>).</div>
+
+                                @if($breadcrumbBgPath)
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="checkbox" value="1" id="breadcrumbBgRemove" name="header[breadcrumb_bg_remove]">
+                                        <label class="form-check-label" for="breadcrumbBgRemove">Remove and use default background</label>
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="col-12">

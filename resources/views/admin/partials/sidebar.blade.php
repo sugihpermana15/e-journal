@@ -56,6 +56,12 @@
                 </a>
             </li>
             <li class="pe-slide">
+                <a href="{{ route('admin.about.edit') }}" class="pe-nav-link">
+                    <i class="bi bi-info-circle pe-nav-icon"></i>
+                    <span class="pe-nav-content">About Settings</span>
+                </a>
+            </li>
+            <li class="pe-slide">
                 <a href="{{ route('admin.ejournal.header.edit') }}" class="pe-nav-link">
                     <i class="bi bi-layout-text-window pe-nav-icon"></i>
                     <span class="pe-nav-content">Header Settings</span>

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\BlogPostController as AdminBlogPostController;
 use App\Http\Controllers\Admin\BlogCategoryController as AdminBlogCategoryController;
+use App\Http\Controllers\Admin\AboutPageController as AdminAboutPageController;
 use App\Http\Controllers\Admin\Ejournal\SettingsController as AdminEjournalSettingsController;
 use App\Http\Controllers\Admin\Ejournal\JournalController as AdminEjournalJournalController;
 use App\Http\Controllers\Admin\Ejournal\HeaderController as AdminEjournalHeaderController;
@@ -49,6 +50,9 @@ Route::prefix('admin')
     ->middleware('auth')
     ->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::get('about-page', [AdminAboutPageController::class, 'edit'])->name('about.edit');
+        Route::put('about-page', [AdminAboutPageController::class, 'update'])->name('about.update');
 
         // E-Journal settings: accessible to all authenticated roles
         Route::prefix('ejournal')

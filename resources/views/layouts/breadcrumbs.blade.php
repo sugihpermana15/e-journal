@@ -22,9 +22,16 @@
         <x-headerNav />
 
         <!--Page Header Start-->
+        @php
+            $headerSettings = (array) \App\Models\Ejournal\Setting::getValue('header', []);
+            $breadcrumbBgPath = (string) data_get($headerSettings, 'breadcrumb_bg_path', '');
+            $breadcrumbBgUrl = $breadcrumbBgPath !== ''
+                ? asset('storage/' . ltrim($breadcrumbBgPath, '/'))
+                : asset('assets/images/backgrounds/page-header-bg.jpg');
+        @endphp
         <section class="page-header">
             <div class="page-header__bg"
-                style="background-image: url({{ asset('assets/images/backgrounds/page-header-bg.jpg') }});">
+                style="background-image: url({{ $breadcrumbBgUrl }});">
             </div>
             <div class="page-header__social">
                 <a href="#">LinkedIn</a>

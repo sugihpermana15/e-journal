@@ -51,6 +51,10 @@ class UpdateHeaderSettingsRequest extends FormRequest
             'header.favicon_path' => ['nullable', 'string', 'max:2048'],
             'header.favicon_file' => ['nullable', 'image', 'max:1024'],
 
+            'header.breadcrumb_bg_path' => ['nullable', 'string', 'max:2048'],
+            'header.breadcrumb_bg_file' => ['nullable', 'image', 'max:4096'],
+            'header.breadcrumb_bg_remove' => ['nullable', 'boolean'],
+
             'header.consultation_text' => ['nullable', 'string', 'max:255'],
             'header.consultation_url' => ['nullable', 'url', 'max:255'],
         ];
