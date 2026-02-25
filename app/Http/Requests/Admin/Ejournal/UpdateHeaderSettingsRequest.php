@@ -55,6 +55,12 @@ class UpdateHeaderSettingsRequest extends FormRequest
             'header.breadcrumb_bg_file' => ['nullable', 'image', 'max:4096'],
             'header.breadcrumb_bg_remove' => ['nullable', 'boolean'],
 
+            // Breadcrumbs social links (page header)
+            'header.breadcrumb_socials' => ['array'],
+            'header.breadcrumb_socials.*' => ['array'],
+            'header.breadcrumb_socials.*.label' => ['nullable', 'string', 'max:255'],
+            'header.breadcrumb_socials.*.url' => ['nullable', 'string', 'max:2048'],
+
             'header.consultation_text' => ['nullable', 'string', 'max:255'],
             'header.consultation_url' => ['nullable', 'url', 'max:255'],
         ];

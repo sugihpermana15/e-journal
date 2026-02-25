@@ -133,6 +133,31 @@ class HeaderController extends Controller
         }
         Arr::set($header, 'socials', array_values($normalizedSocials));
 
+        $breadcrumbSocials = Arr::get($header, 'breadcrumb_socials', []);
+        if (!is_array($breadcrumbSocials)) {
+            $breadcrumbSocials = [];
+        }
+
+        $normalizedBreadcrumbSocials = [];
+        foreach ($breadcrumbSocials as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $label = trim((string) ($row['label'] ?? ''));
+            $url = trim((string) ($row['url'] ?? ''));
+
+            if ($label === '' || $url === '') {
+                continue;
+            }
+
+            $normalizedBreadcrumbSocials[] = [
+                'label' => $label,
+                'url' => $url,
+            ];
+        }
+        Arr::set($header, 'breadcrumb_socials', array_values($normalizedBreadcrumbSocials));
+
         return $header;
     }
 }

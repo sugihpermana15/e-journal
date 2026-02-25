@@ -49,6 +49,19 @@
         $breadcrumbBgUrl = $breadcrumbBgPath
             ? asset('storage/' . ltrim($breadcrumbBgPath, '/'))
             : asset('assets/images/backgrounds/page-header-bg.jpg');
+
+        $breadcrumbSocials = old('header.breadcrumb_socials', data_get($header, 'breadcrumb_socials'));
+        if (!is_array($breadcrumbSocials)) {
+            $breadcrumbSocials = [];
+        }
+        if (count($breadcrumbSocials) === 0) {
+            $breadcrumbSocials = [
+                ['label' => 'LinkedIn', 'url' => ''],
+                ['label' => 'Pinterest', 'url' => ''],
+                ['label' => 'twitter-x', 'url' => ''],
+                ['label' => 'facebook', 'url' => ''],
+            ];
+        }
     @endphp
 
     @if (session('success'))
@@ -168,6 +181,46 @@
                                 @endif
                             </div>
 
+                            <div class="col-12 mt-2">
+                                <hr class="my-2">
+                            </div>
+
+                            <div class="col-12">
+                                <h6 class="mb-1">Breadcrumbs Social Links</h6>
+                                <div class="text-muted small">Shown in the public breadcrumbs area (page header). Leave blank to hide the link.</div>
+                                <div class="text-muted small">Both Label and URL must be filled, otherwise the item is hidden.</div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered align-middle mb-2" id="breadcrumbSocialsTable">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 260px">Label</th>
+                                                <th>URL</th>
+                                                <th style="width: 80px"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($breadcrumbSocials as $i => $s)
+                                                <tr>
+                                                    <td>
+                                                        <input class="form-control" name="header[breadcrumb_socials][{{ $i }}][label]" value="{{ data_get($s, 'label') }}" placeholder="LinkedIn">
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control" name="header[breadcrumb_socials][{{ $i }}][url]" value="{{ data_get($s, 'url') }}" placeholder="https://...">
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <button type="button" class="btn btn-outline-danger btn-sm js-remove-row">Remove</button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button type="button" class="btn btn-outline-primary btn-sm" id="addBreadcrumbSocialRow">Add Link</button>
+                            </div>
+
                             <div class="col-12">
                                 <h6 class="mb-1">Social</h6>
                                 <div class="text-muted small">Leave blank to hide the icon link.</div>
@@ -280,11 +333,20 @@
         </tr>
     </template>
 
+    <template id="breadcrumbSocialRowTemplate">
+        <tr>
+            <td><input class="form-control" data-name="label" placeholder="LinkedIn"></td>
+            <td><input class="form-control" data-name="url" placeholder="https://..."></td>
+            <td class="text-end"><button type="button" class="btn btn-outline-danger btn-sm js-remove-row">Remove</button></td>
+        </tr>
+    </template>
+
     <script>
         (function() {
             document.addEventListener('DOMContentLoaded', function() {
                 var contactsTable = document.getElementById('contactsTable');
                 var socialsTable = document.getElementById('socialsTable');
+                var breadcrumbSocialsTable = document.getElementById('breadcrumbSocialsTable');
 
                 function wireRemoveButtons(root) {
                     root.querySelectorAll('.js-remove-row').forEach(function(btn) {
@@ -325,6 +387,21 @@
                     wireRemoveButtons(tbody);
                 }
 
+                function addBreadcrumbSocialRow() {
+                    var tpl = document.getElementById('breadcrumbSocialRowTemplate');
+                    var tbody = breadcrumbSocialsTable.querySelector('tbody');
+                    var index = tbody.querySelectorAll('tr').length;
+
+                    var fragment = tpl.content.cloneNode(true);
+                    fragment.querySelectorAll('input[data-name]').forEach(function(input) {
+                        var key = input.getAttribute('data-name');
+                        input.name = 'header[breadcrumb_socials][' + index + '][' + key + ']';
+                    });
+
+                    tbody.appendChild(fragment);
+                    wireRemoveButtons(tbody);
+                }
+
                 wireRemoveButtons(document);
 
                 var addContactBtn = document.getElementById('addContactRow');
@@ -335,6 +412,11 @@
                 var addSocialBtn = document.getElementById('addSocialRow');
                 if (addSocialBtn) {
                     addSocialBtn.addEventListener('click', addSocialRow);
+                }
+
+                var addBreadcrumbSocialBtn = document.getElementById('addBreadcrumbSocialRow');
+                if (addBreadcrumbSocialBtn && breadcrumbSocialsTable) {
+                    addBreadcrumbSocialBtn.addEventListener('click', addBreadcrumbSocialRow);
                 }
             });
         })();

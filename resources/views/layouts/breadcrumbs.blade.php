@@ -28,16 +28,33 @@
             $breadcrumbBgUrl = $breadcrumbBgPath !== ''
                 ? asset('storage/' . ltrim($breadcrumbBgPath, '/'))
                 : asset('assets/images/backgrounds/page-header-bg.jpg');
+
+            $breadcrumbSocials = data_get($headerSettings, 'breadcrumb_socials');
+            if (!is_array($breadcrumbSocials)) {
+                $breadcrumbSocials = [];
+            }
+            if (count($breadcrumbSocials) === 0) {
+                $breadcrumbSocials = [
+                    ['label' => 'LinkedIn', 'url' => '#'],
+                    ['label' => 'Pinterest', 'url' => '#'],
+                    ['label' => 'twitter-x', 'url' => '#'],
+                    ['label' => 'facebook', 'url' => '#'],
+                ];
+            }
         @endphp
         <section class="page-header">
             <div class="page-header__bg"
                 style="background-image: url({{ $breadcrumbBgUrl }});">
             </div>
             <div class="page-header__social">
-                <a href="#">LinkedIn</a>
-                <a href="#">Pinterest</a>
-                <a href="#">twitter-x</a>
-                <a href="#">facebook</a>
+                @foreach($breadcrumbSocials as $s)
+                    @php
+                        $label = trim((string) data_get($s, 'label', ''));
+                        $url = trim((string) data_get($s, 'url', ''));
+                    @endphp
+                    @continue($label === '' || $url === '')
+                    <a href="{{ $url }}" target="_blank" rel="noopener">{{ $label }}</a>
+                @endforeach
             </div>
             <div class="container">
                 <div class="page-header__inner">
