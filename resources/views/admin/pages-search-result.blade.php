@@ -38,7 +38,7 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="blog-tab" data-bs-toggle="tab" data-bs-target="#blog-tab-pane"
-                            type="button" role="tab" aria-controls="blog-tab-pane" aria-selected="true">Blog</button>
+                            type="button" role="tab" aria-controls="blog-tab-pane" aria-selected="true">Scientific News</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="video-tab" data-bs-toggle="tab" data-bs-target="#video-tab-pane"

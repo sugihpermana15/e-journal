@@ -1,8 +1,8 @@
 @extends('partials.layouts.master')
 
-@section('title', 'Blog Details | FabKin Admin & Dashboards Template')
+@section('title', 'Scientific News Details | FabKin Admin & Dashboards Template')
 @section('title-sub', 'Page')
-@section('pagetitle', 'Blog Create')
+@section('pagetitle', 'Scientific News Create')
 
 @section('css')
     <!-- Editor css -->
@@ -23,19 +23,19 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h6 class="card-title">New Blog</h6>
+                        <h6 class="card-title">New Scientific News</h6>
                     </div>
                     <div class="card-body">
                         <form action="#" method="POST">
                             <div class="row g-5">
                                 <div class="col-12 col-xl-6">
-                                    <label for="blogTitle" class="form-label">Blog Title<span
+                                    <label for="blogTitle" class="form-label">Scientific News Title<span
                                             class="text-danger ms-1">*</span></label>
-                                    <input type="text" placeholder="Blog Title" class="form-control" id="blogTitle"
+                                    <input type="text" placeholder="Scientific News Title" class="form-control" id="blogTitle"
                                         required>
                                 </div>
                                 <div class="col-12 col-xl-6">
-                                    <label for="default-choice" class="form-label">Blog Category</label>
+                                    <label for="default-choice" class="form-label">Scientific News Category</label>
                                     <select id="default-choice">
                                         <option value="python">Web Development</option>
                                         <option value="javascript">Technology</option>
@@ -45,13 +45,13 @@
                                     </select>
                                 </div>
                                 <div class="col-12 col-xl-6">
-                                    <label for="blogAuthor" class="form-label">Blog Author<span
+                                    <label for="blogAuthor" class="form-label">Scientific News Author<span
                                             class="text-danger ms-1">*</span></label>
                                     <input type="text" placeholder="Enter Name" class="form-control" id="blogAuthor"
                                         required>
                                 </div>
                                 <div class="col-12 col-xl-6">
-                                    <label for="choices-default-multiple" class="form-label">Blog Tags</label>
+                                    <label for="choices-default-multiple" class="form-label">Scientific News Tags</label>
                                     <select id="choices-default-multiple" multiple>
                                         <option value="react">Social Media Marketing</option>
                                         <option value="Marketing">Digital Marketing</option>
@@ -73,7 +73,7 @@
                                     </select>
                                 </div>
                                 <div class="col-12 col-xl-4">
-                                    <label for="choices-blog-visibility" class="form-label">Blog Visibility</label>
+                                    <label for="choices-blog-visibility" class="form-label">Scientific News Visibility</label>
                                     <select id="choices-blog-visibility">
                                         <option value="pending-review">Public</option>
                                         <option value="published">Private</option>
@@ -81,21 +81,21 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-12">
-                                    <label for="BlogExcerpt" class="form-label">Blog Excerpt<span
+                                    <label for="BlogExcerpt" class="form-label">Scientific News Excerpt<span
                                             class="text-danger ms-1">*</span></label>
                                     <textarea name="forsummary" id="BlogExcerpt" rows="4" class="form-control" placeholder="Write short summary..."></textarea>
                                 </div>
                                 <div class="col-lg-12">
-                                    <label for="snowEditor" class="form-label">Blog Content</label>
+                                    <label for="snowEditor" class="form-label">Scientific News Content</label>
                                     <div id="snowEditor"></div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <label for="my-dropzone" class="form-label">Blog Image</label>
+                                    <label for="my-dropzone" class="form-label">Scientific News Image</label>
                                     <div class="file-upload dropzone " id="my-dropzone"></div>
                                 </div>
                                 <div class="col-lg-12 justify-content-end d-flex gap-3 mt-6">
                                     <button class="btn btn-light-light text-body">Save as Draft</button>
-                                    <button class="btn btn-primary">Publish Blog</button>
+                                    <button class="btn btn-primary">Publish Scientific News</button>
                                 </div>
                             </div>
                         </form>

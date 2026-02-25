@@ -118,7 +118,7 @@ class BlogPostController extends Controller
 
         return redirect()
             ->route('admin.blog.posts.index')
-            ->with('success', 'Blog post created successfully.');
+            ->with('success', 'Scientific News post created successfully.');
     }
 
     public function edit(BlogPost $post)
@@ -209,7 +209,7 @@ class BlogPostController extends Controller
 
         return redirect()
             ->route('admin.blog.posts.index')
-            ->with('success', 'Blog post updated successfully.');
+            ->with('success', 'Scientific News post updated successfully.');
     }
 
     public function destroy(BlogPost $post)
@@ -218,7 +218,7 @@ class BlogPostController extends Controller
 
         return redirect()
             ->route('admin.blog.posts.index')
-            ->with('success', 'Blog post deleted successfully.');
+            ->with('success', 'Scientific News post deleted successfully.');
     }
 
     private function validatePayload(Request $request): array

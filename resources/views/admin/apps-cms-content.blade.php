@@ -155,7 +155,7 @@
                                     </tr>
                                     <tr>
                                         <td>6</td>
-                                        <td>Blog</td>
+                                        <td>Scientific News</td>
                                         <td><span class="badge bg-light text-muted">Draft</span></td>
                                         <td><span class="badge bg-warning-subtle text-warning">Private</span></td>
                                         <td>15 Feb 2025</td>

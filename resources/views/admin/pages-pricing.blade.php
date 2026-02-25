@@ -1,6 +1,6 @@
 @extends('partials.layouts.master')
 
-@section('title', 'Blog Details | FabKin Admin & Dashboards Template')
+@section('title', 'Pricing | FabKin Admin & Dashboards Template')
 
 @section('title-sub', 'Pages')
 @section('pagetitle', 'Pricing')

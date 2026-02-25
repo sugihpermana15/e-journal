@@ -70,7 +70,7 @@
                                         <div class="form-check form-check-primary mb-3">
                                             <input class="form-check-input" type="checkbox" value="Blog" id="Blog"
                                                 checked>
-                                            <label class="form-check-label" for="Blog">Blog</label>
+                                            <label class="form-check-label" for="Blog">Scientific News</label>
                                         </div>
                                     </div>
                                     <div class="col-2">
@@ -304,7 +304,7 @@
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#demo_accordion_item_66" aria-expanded="false"
                                         aria-controls="demo_accordion_item_66">
-                                        <i class="bi bi-arrows-move me-2"></i>Blog
+                                        <i class="bi bi-arrows-move me-2"></i>Scientific News
                                     </button>
                                 </h2>
                                 <div id="demo_accordion_item_66" class="accordion-collapse collapse"
@@ -397,7 +397,7 @@
                                         <div class="form-check form-check-primary mb-3">
                                             <input class="form-check-input" type="checkbox" value="Blog"
                                                 id="Blog">
-                                            <label class="form-check-label" for="Blog">Blog</label>
+                                            <label class="form-check-label" for="Blog">Scientific News</label>
                                         </div>
                                         <div class="col-12 text-end">
                                             <button class="btn btn-light-primary">Add to menu</button>

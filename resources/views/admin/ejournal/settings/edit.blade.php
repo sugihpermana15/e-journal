@@ -137,23 +137,6 @@
                 ['icon' => 'icon-experience', 'count' => 12, 'suffixes' => 'k|+', 'label' => 'Positive Rating in Trustpilot'],
                 ['icon' => 'icon-costumer', 'count' => 35, 'suffixes' => 'm', 'label' => 'Rating in oy local City Network'],
             ],
-            'contact' => [
-                'tagline' => 'CALL TO ACTION',
-                'heading_html' => 'Connect with our editorial team, discuss submissions, peer review, and publishing policies',
-                'name_placeholder' => 'Name*',
-                'email_placeholder' => 'Email*',
-                'phone_placeholder' => 'Phone*',
-                'subject_placeholder' => 'Subject*',
-                'subject_options' => [
-                    'Manuscript Submission',
-                    'Peer Review',
-                    'Publishing Ethics',
-                    'Open Access',
-                    'Indexing & Archiving',
-                ],
-                'message_placeholder' => 'Write a your Message',
-                'button_text' => 'Send Message',
-            ],
             'manuscript' => [
                 'title' => 'Submit Manuscript',
                 'subtitle' => 'Request editorial guidance and publication information.',
@@ -286,24 +269,6 @@
                     'placeholder' => 'Enter Your Email',
                     'button_text' => 'Subscribe',
                 ],
-            ],
-
-            'contact_page' => [
-                'left_tagline' => 'Get In touch',
-                'left_title_html' => 'Reach Out to <span>Us for </span> <br><span>Assistance or Inquiries</span>',
-                'left_text' => "We're Here to Help—Contact Us Today!",
-                'address_title' => 'Our Address',
-                'address_html' => '567 Oak Avenue, Apartment 910,<br> Chicago, IL 60601, USA',
-                'contact_info_title' => 'Contact Info',
-                'phone' => '+62 897 1399 093',
-                'email' => 'info@domain.com',
-                'working_time_title' => 'Working Time',
-                'time_label' => 'Time:',
-                'time_value' => '10:00 AM - 6:00 PM',
-                'days_label' => 'Days:',
-                'days_value' => 'Monday - Friday',
-                'right_tagline' => 'Contact US',
-                'right_title' => 'Send Message',
             ],
 
             // Public Services page (additional sections beyond tabs)
@@ -535,22 +500,6 @@
             'services_detail.faq.contact.title_html',
             'services_detail.faq.contact.button_text',
             'services_detail.faq.contact.button_url',
-            'contact.heading_html',
-            'contact_page.left_tagline',
-            'contact_page.left_title_html',
-            'contact_page.left_text',
-            'contact_page.address_title',
-            'contact_page.address_html',
-            'contact_page.contact_info_title',
-            'contact_page.phone',
-            'contact_page.email',
-            'contact_page.working_time_title',
-            'contact_page.time_label',
-            'contact_page.time_value',
-            'contact_page.days_label',
-            'contact_page.days_value',
-            'contact_page.right_tagline',
-            'contact_page.right_title',
             'manuscript.subtitle',
             'testimonials.tagline',
             'testimonials.heading_html',
@@ -569,7 +518,6 @@
             'about.points',
             'services.tabs',
             'counters',
-            'contact.subject_options',
             'manuscript.category_options',
             'testimonials.items',
             'blog.cards',
@@ -724,9 +672,6 @@
         }
         $counters = array_slice(array_pad($counters, 4, []), 0, 4);
 
-        $contact = (array) data_get($home, 'contact', []);
-        $contactSubjectLines = implode("\n", (array) data_get($contact, 'subject_options', []));
-
         $manuscript = (array) data_get($home, 'manuscript', []);
         $manuscriptCategoryLines = implode("\n", (array) data_get($manuscript, 'category_options', []));
 
@@ -799,11 +744,9 @@
                                     <div class="text-muted small mb-2">Other</div>
                                     <div class="list-group">
                                         <a class="list-group-item list-group-item-action py-2" href="#section-counters">Counters</a>
-                                        <a class="list-group-item list-group-item-action py-2" href="#section-blog-cards">Blog Cards</a>
-                                        <a class="list-group-item list-group-item-action py-2" href="#section-blog-sidebar">Blog Sidebar</a>
-                                        <a class="list-group-item list-group-item-action py-2" href="#section-blog-detail">Blog Detail</a>
-                                        <a class="list-group-item list-group-item-action py-2" href="#section-contact-cta">Contact CTA</a>
-                                        <a class="list-group-item list-group-item-action py-2" href="#section-contact-page">Contact Page</a>
+                                        <a class="list-group-item list-group-item-action py-2" href="#section-blog-cards">Scientific News Cards</a>
+                                        <a class="list-group-item list-group-item-action py-2" href="#section-blog-sidebar">Scientific News Sidebar</a>
+                                        <a class="list-group-item list-group-item-action py-2" href="#section-blog-detail">Scientific News Detail</a>
                                         <a class="list-group-item list-group-item-action py-2" href="#section-submit-manuscript">Submit Manuscript</a>
                                         <a class="list-group-item list-group-item-action py-2" href="#section-testimonials">Testimonials</a>
                                     </div>
@@ -1602,8 +1545,8 @@
                             <hr class="my-2" />
 
                             <div class="col-12" id="section-blog-sidebar">
-                                <h6 class="mb-1">Blog Sidebar</h6>
-                                <div class="text-muted small">Controls Search / Category / Keywords / Subscribe blocks on blog pages.</div>
+                                <h6 class="mb-1">Scientific News Sidebar</h6>
+                                <div class="text-muted small">Controls Search / Category / Keywords / Subscribe blocks on Scientific News pages.</div>
                             </div>
 
                             <div class="col-12">
@@ -1691,8 +1634,8 @@
                             <hr class="my-2" />
 
                             <div class="col-12" id="section-blog-detail">
-                                <h6 class="mb-1">Blog Detail Page</h6>
-                                <div class="text-muted small">Controls the <code>/blog-details</code> hero + meta. (Blog list uses Blog Cards above to avoid double input.)</div>
+                                <h6 class="mb-1">Scientific News Detail Page</h6>
+                                <div class="text-muted small">Controls the <code>/blog-details</code> hero + meta. (Scientific News list uses Scientific News Cards above to avoid double input.)</div>
                             </div>
 
                             <div class="col-12">
@@ -1726,160 +1669,6 @@
                                         <div class="col-12 col-md-4">
                                             <label class="form-label">Published Label</label>
                                             <input class="form-control" name="home[blog_detail][published]" value="{{ old('home.blog_detail.published', data_get($home, 'blog_detail.published')) }}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr class="my-2" />
-
-                            <div class="col-12" id="section-contact-cta">
-                                <h6 class="mb-1">Contact CTA Section</h6>
-                                <div class="text-muted small">Heading, images, and placeholders for the contact form.</div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="border rounded p-3">
-                                    <div class="row g-3">
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Tagline</label>
-                                            <input class="form-control" name="home[contact][tagline]" value="{{ old('home.contact.tagline', data_get($contact, 'tagline', 'CALL TO ACTION')) }}">
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-label">Heading HTML (allowed: &lt;br&gt; and &lt;span&gt;)</label>
-                                            <textarea class="form-control" name="home[contact][heading_html]" rows="3">{{ old('home.contact.heading_html', data_get($contact, 'heading_html')) }}</textarea>
-                                        </div>
-
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Name Placeholder</label>
-                                            <input class="form-control" name="home[contact][name_placeholder]" value="{{ old('home.contact.name_placeholder', data_get($contact, 'name_placeholder', 'Name*')) }}">
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Email Placeholder</label>
-                                            <input class="form-control" name="home[contact][email_placeholder]" value="{{ old('home.contact.email_placeholder', data_get($contact, 'email_placeholder', 'Email*')) }}">
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Phone Placeholder</label>
-                                            <input class="form-control" name="home[contact][phone_placeholder]" value="{{ old('home.contact.phone_placeholder', data_get($contact, 'phone_placeholder', 'Phone*')) }}">
-                                        </div>
-
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Subject Placeholder</label>
-                                            <input class="form-control" name="home[contact][subject_placeholder]" value="{{ old('home.contact.subject_placeholder', data_get($contact, 'subject_placeholder', 'Subject*')) }}">
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <label class="form-label">Subject Options (one line per option)</label>
-                                            <textarea class="form-control" name="home[contact][subject_options_lines]" rows="4">{{ old('home.contact.subject_options_lines', $contactSubjectLines) }}</textarea>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label class="form-label">Message Placeholder</label>
-                                            <input class="form-control" name="home[contact][message_placeholder]" value="{{ old('home.contact.message_placeholder', data_get($contact, 'message_placeholder', 'Write a your Message')) }}">
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Button Text</label>
-                                            <input class="form-control" name="home[contact][button_text]" value="{{ old('home.contact.button_text', data_get($contact, 'button_text', 'Send Message')) }}">
-                                        </div>
-
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Left Image (Main) Upload</label>
-                                            <input class="form-control" type="file" name="home[contact][image_main_file]" accept="image/*">
-                                            @if(data_get($contact, 'image_main'))
-                                                <div class="form-text">Current: {{ data_get($contact, 'image_main') }}</div>
-                                            @endif
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Left Image (Small #1) Upload</label>
-                                            <input class="form-control" type="file" name="home[contact][image_small1_file]" accept="image/*">
-                                            @if(data_get($contact, 'image_small1'))
-                                                <div class="form-text">Current: {{ data_get($contact, 'image_small1') }}</div>
-                                            @endif
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Left Image (Small #2) Upload</label>
-                                            <input class="form-control" type="file" name="home[contact][image_small2_file]" accept="image/*">
-                                            @if(data_get($contact, 'image_small2'))
-                                                <div class="form-text">Current: {{ data_get($contact, 'image_small2') }}</div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr class="my-2" />
-
-                            <div class="col-12" id="section-contact-page">
-                                <h6 class="mb-1">Contact Page</h6>
-                                <div class="text-muted small">Controls the <code>/contact</code> page texts (address/info). Form placeholders reuse <strong>Contact CTA</strong> above to avoid double input.</div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="border rounded p-3">
-                                    <div class="row g-3">
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Left Tagline</label>
-                                            <input class="form-control" name="home[contact_page][left_tagline]" value="{{ old('home.contact_page.left_tagline', data_get($home, 'contact_page.left_tagline')) }}">
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-label">Left Title HTML (allowed: &lt;br&gt; and &lt;span&gt;)</label>
-                                            <textarea class="form-control" name="home[contact_page][left_title_html]" rows="2">{{ old('home.contact_page.left_title_html', data_get($home, 'contact_page.left_title_html')) }}</textarea>
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-label">Left Text</label>
-                                            <input class="form-control" name="home[contact_page][left_text]" value="{{ old('home.contact_page.left_text', data_get($home, 'contact_page.left_text')) }}">
-                                        </div>
-
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Address Title</label>
-                                            <input class="form-control" name="home[contact_page][address_title]" value="{{ old('home.contact_page.address_title', data_get($home, 'contact_page.address_title')) }}">
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <label class="form-label">Address HTML (allowed: &lt;br&gt;)</label>
-                                            <textarea class="form-control" name="home[contact_page][address_html]" rows="2">{{ old('home.contact_page.address_html', data_get($home, 'contact_page.address_html')) }}</textarea>
-                                        </div>
-
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Contact Info Title</label>
-                                            <input class="form-control" name="home[contact_page][contact_info_title]" value="{{ old('home.contact_page.contact_info_title', data_get($home, 'contact_page.contact_info_title')) }}">
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Phone</label>
-                                            <input class="form-control" name="home[contact_page][phone]" value="{{ old('home.contact_page.phone', data_get($home, 'contact_page.phone')) }}">
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Email</label>
-                                            <input class="form-control" name="home[contact_page][email]" value="{{ old('home.contact_page.email', data_get($home, 'contact_page.email')) }}">
-                                        </div>
-
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Working Time Title</label>
-                                            <input class="form-control" name="home[contact_page][working_time_title]" value="{{ old('home.contact_page.working_time_title', data_get($home, 'contact_page.working_time_title')) }}">
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Time Label</label>
-                                            <input class="form-control" name="home[contact_page][time_label]" value="{{ old('home.contact_page.time_label', data_get($home, 'contact_page.time_label')) }}">
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Time Value</label>
-                                            <input class="form-control" name="home[contact_page][time_value]" value="{{ old('home.contact_page.time_value', data_get($home, 'contact_page.time_value')) }}">
-                                        </div>
-
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Days Label</label>
-                                            <input class="form-control" name="home[contact_page][days_label]" value="{{ old('home.contact_page.days_label', data_get($home, 'contact_page.days_label')) }}">
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <label class="form-label">Days Value</label>
-                                            <input class="form-control" name="home[contact_page][days_value]" value="{{ old('home.contact_page.days_value', data_get($home, 'contact_page.days_value')) }}">
-                                        </div>
-
-                                        <div class="col-12 col-md-4">
-                                            <label class="form-label">Right Tagline</label>
-                                            <input class="form-control" name="home[contact_page][right_tagline]" value="{{ old('home.contact_page.right_tagline', data_get($home, 'contact_page.right_tagline')) }}">
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <label class="form-label">Right Title</label>
-                                            <input class="form-control" name="home[contact_page][right_title]" value="{{ old('home.contact_page.right_title', data_get($home, 'contact_page.right_title')) }}">
                                         </div>
                                     </div>
                                 </div>

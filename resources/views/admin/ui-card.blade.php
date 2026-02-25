@@ -287,7 +287,7 @@
 
             <div class="col-md-6 col-xl-4">
                 <div class="card card-h-100 blog-post-extended">
-                    <img src="assets/images/small/img-14.jpg" class="card-img-top" alt="Blog Image">
+                    <img src="assets/images/small/img-14.jpg" class="card-img-top" alt="Scientific News Image">
                     <div class="card-body">
                         <h5 class="card-title">10 Tips to Improve Your Coding Skills</h5>
                         <p class="card-text">

@@ -208,7 +208,7 @@
                             </li>
                             <li class="pe-slide-item">
                                 <a href="apps-cms-blog" class="pe-nav-link">
-                                    Blog
+                                    Scientific News
                                 </a>
                             </li>
                         </ul>
@@ -364,26 +364,26 @@
                     </li>
                     <li class="pe-slide pe-has-sub">
                         <a href="#collapseBlogs" class="pe-nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseBlogs">
-                            <span class="pe-nav-sub-content">Blogs</span>
+                            <span class="pe-nav-sub-content">Scientific News</span>
                             <i class="ri-arrow-down-s-line pe-nav-arrow"></i>
                         </a>
                         <ul class="pe-slide-menu collapse" id="collapseBlogs">
                             <li class="slide pe-nav-content1">
-                                <a href="javascript:void(0)">Blog</a>
+                                <a href="javascript:void(0)">Scientific News</a>
                             </li>
                             <li class="pe-slide-item">
                                 <a href="pages-blog-list" class="pe-nav-link">
-                                    Blog List
+                                    Scientific News List
                                 </a>
                             </li>
                             <li class="pe-slide-item">
                                 <a href="pages-blog-details" class="pe-nav-link">
-                                    Blog Details
+                                    Scientific News Details
                                 </a>
                             </li>
                             <li class="pe-slide-item">
                                 <a href="pages-blog-create" class="pe-nav-link">
-                                    Create Blog
+                                    Create Scientific News
                                 </a>
                             </li>
                         </ul>

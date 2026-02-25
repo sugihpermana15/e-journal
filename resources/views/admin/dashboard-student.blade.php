@@ -315,7 +315,7 @@
                                 <div class="d-flex gap-3 align-items-center justify-content-between">
                                     <div>
                                         <h6 class="mb-2">Content Creation</h6>
-                                        <p class="mb-0 text-muted fs-14">Write blog articles and social media posts.</p>
+                                        <p class="mb-0 text-muted fs-14">Write scientific news articles and social media posts.</p>
                                     </div>
                                     <div class="form-check form-check-primary">
                                         <input class="form-check-input border-1" type="checkbox" id="task2">

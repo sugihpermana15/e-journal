@@ -58,7 +58,7 @@
                                 <h6 class="mt-1 mb-3">Home</h6>
                                 <p class="mb-0">
                                     Welcome to our Admin! Here you can find information about our latest news, events, and
-                                    updates. Stay tuned for blog posts and announcements. If you're new, we recommend
+                                    updates. Stay tuned for scientific news posts and announcements. If you're new, we recommend
                                     checking out our About Us page to learn more about what we do and how we can help you.
                                     Feel free to explore and contact us if you have any questions!
                                 </p>
@@ -144,7 +144,7 @@
                                 <h6 class="mt-1 mb-3">Home</h6>
                                 <p class="mb-0">
                                     Welcome to our Admin! Here you can find information about our latest news, events, and
-                                    updates. Stay tuned for blog posts and announcements. If you're new, we recommend
+                                    updates. Stay tuned for scientific news posts and announcements. If you're new, we recommend
                                     checking out our About Us page to learn more about what we do and how we can help you.
                                     Feel free to explore and contact us if you have any questions!
                                 </p>
@@ -229,7 +229,7 @@
                                 <h6 class="mt-1 mb-3">Home</h6>
                                 <p class="mb-0">
                                     Welcome to our Admin! Here you can find information about our latest news, events, and
-                                    updates. Stay tuned for blog posts and announcements. If you're new, we recommend
+                                    updates. Stay tuned for scientific news posts and announcements. If you're new, we recommend
                                     checking out our About Us page to learn more about what we do and how we can help you.
                                     Feel free to explore and contact us if you have any questions!
                                 </p>
@@ -317,7 +317,7 @@
                                         <h6 class="mt-1 mb-3">Home</h6>
                                         <p class="mb-0">
                                             Welcome to our Admin! Here you can find information about our latest news,
-                                            events, and updates. Stay tuned for blog posts and announcements. If you're new,
+                                            events, and updates. Stay tuned for scientific news posts and announcements. If you're new,
                                             we recommend checking out our About Us page to learn more about what we do and
                                             how we can help you. Feel free to explore and contact us if you have any
                                             questions!
@@ -403,7 +403,7 @@
                                 <h6 class="mb-3">Home</h6>
                                 <p class="mb-0">
                                     Welcome to our Admin! Here you can find information about our latest news, events, and
-                                    updates. Stay tuned for blog posts and announcements. If you're new, we recommend
+                                    updates. Stay tuned for scientific news posts and announcements. If you're new, we recommend
                                     checking out our About Us page to learn more about what we do and how we can help you.
                                     Feel free to explore and contact us if you have any questions!
                                 </p>
@@ -453,7 +453,7 @@
                                 <h6 class="mb-3">Home</h6>
                                 <p class="mb-0">
                                     Welcome to our Admin! Here you can find information about our latest news, events, and
-                                    updates. Stay tuned for blog posts and announcements. If you're new, we recommend
+                                    updates. Stay tuned for scientific news posts and announcements. If you're new, we recommend
                                     checking out our About Us page to learn more about what we do and how we can help you.
                                     Feel free to explore and contact us if you have any questions!
                                 </p>
@@ -568,7 +568,7 @@
                                 <h6 class="mb-3">Home</h6>
                                 <p class="mb-0">
                                     Welcome to our Admin! Here you can find information about our latest news, events, and
-                                    updates. Stay tuned for blog posts and announcements. If you're new, we recommend
+                                    updates. Stay tuned for scientific news posts and announcements. If you're new, we recommend
                                     checking out our About Us page to learn more about what we do and how we can help you.
                                     Feel free to explore and contact us if you have any questions!
                                 </p>
@@ -651,7 +651,7 @@
                                 <h6 class="mt-1 mb-3">Home</h6>
                                 <p class="mb-0">
                                     Welcome to our Admin! Here you can find information about our latest news, events, and
-                                    updates. Stay tuned for blog posts and announcements. If you're new, we recommend
+                                    updates. Stay tuned for scientific news posts and announcements. If you're new, we recommend
                                     checking out our About Us page to learn more about what we do and how we can help you.
                                     Feel free to explore and contact us if you have any questions!
                                 </p>
@@ -734,7 +734,7 @@
                                 <h6 class="mt-1 mb-3">Home</h6>
                                 <p class="mb-0">
                                     Welcome to our Admin! Here you can find information about our latest news, events, and
-                                    updates. Stay tuned for blog posts and announcements. If you're new, we recommend
+                                    updates. Stay tuned for scientific news posts and announcements. If you're new, we recommend
                                     checking out our About Us page to learn more about what we do and how we can help you.
                                     Feel free to explore and contact us if you have any questions!
                                 </p>
@@ -818,7 +818,7 @@
                                 <h6 class="mt-1 mb-3">Home</h6>
                                 <p class="mb-0">
                                     Welcome to our Admin! Here you can find information about our latest news, events, and
-                                    updates. Stay tuned for blog posts and announcements. If you're new, we recommend
+                                    updates. Stay tuned for scientific news posts and announcements. If you're new, we recommend
                                     checking out our About Us page to learn more about what we do and how we can help you.
                                     Feel free to explore and contact us if you have any questions!
                                 </p>
@@ -897,7 +897,7 @@
                                 <h6 class="mt-1 mb-3">Home</h6>
                                 <p class="mb-0">
                                     Welcome to our Admin! Here you can find information about our latest news, events, and
-                                    updates. Stay tuned for blog posts and announcements. If you're new, we recommend
+                                    updates. Stay tuned for scientific news posts and announcements. If you're new, we recommend
                                     checking out our About Us page to learn more about what we do and how we can help you.
                                     Feel free to explore and contact us if you have any questions!
                                 </p>

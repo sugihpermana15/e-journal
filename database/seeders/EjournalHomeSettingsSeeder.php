@@ -245,7 +245,7 @@ class EjournalHomeSettingsSeeder extends Seeder
             'blog' => [
                 'tagline' => 'OUR INSIGHT',
                 'heading_html' => 'Discover Insights and <span>Tips</span> <br><span>in Our Latest Articles</span>',
-                'button_text' => 'View All Blogs',
+                'button_text' => 'View All Scientific News',
                 'button_url' => '/blog-list',
                 'cards' => [
                     [

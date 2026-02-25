@@ -1,8 +1,8 @@
 @extends('admin.partials.Layouts.master')
 
-@section('title', 'Blog Categories | Admin')
+@section('title', 'Scientific News Categories | Admin')
 @section('title-sub', 'Content')
-@section('pagetitle', 'Blog Categories')
+@section('pagetitle', 'Scientific News Categories')
 
 @section('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
@@ -14,8 +14,8 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <div>
-                        <h5 class="card-title mb-0">Blog Categories</h5>
-                        <div class="text-muted small">Used as master categories for Blog Posts.</div>
+                        <h5 class="card-title mb-0">Scientific News Categories</h5>
+                        <div class="text-muted small">Used as master categories for Scientific News posts.</div>
                     </div>
                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
                         Add Category
@@ -77,7 +77,7 @@
                     <input type="hidden" name="_modal" value="add_category">
 
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addCategoryModalLabel">Add Blog Category</h5>
+                        <h5 class="modal-title" id="addCategoryModalLabel">Add Scientific News Category</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 

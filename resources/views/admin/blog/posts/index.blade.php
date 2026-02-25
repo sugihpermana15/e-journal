@@ -1,8 +1,8 @@
 @extends('admin.partials.Layouts.master')
 
-@section('title', 'Blog Posts | Admin')
+@section('title', 'Scientific News Posts | Admin')
 @section('title-sub', 'Content')
-@section('pagetitle', 'Blog Posts')
+@section('pagetitle', 'Scientific News Posts')
 
 @section('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
@@ -14,8 +14,8 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <div>
-                        <h5 class="card-title mb-0">Blog Posts</h5>
-                        <div class="text-muted small">Posts will appear on public Blog when <strong>Published</strong>.</div>
+                        <h5 class="card-title mb-0">Scientific News Posts</h5>
+                        <div class="text-muted small">Posts will appear on public Scientific News when <strong>Published</strong>.</div>
                     </div>
                     <a href="{{ route('admin.blog.posts.create') }}" class="btn btn-success btn-sm">Add Post</a>
                 </div>

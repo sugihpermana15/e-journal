@@ -151,8 +151,8 @@
 
         <div class="card mt-3">
             <div class="card-header">
-                <div class="fw-semibold">Blog Details Template</div>
-                <div class="text-muted small">Optional. Fill to match the existing blog-details design.</div>
+                <div class="fw-semibold">Scientific News Details Template</div>
+                <div class="text-muted small">Optional. Fill to match the existing Scientific News details design.</div>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -510,7 +510,7 @@
                         <img src="{{ $heroUrl }}" alt="" style="width: 56px; height: 56px; object-fit: cover; border-radius: 8px;">
                         <div>
                             <div class="fw-semibold">Hero image</div>
-                            <div class="text-muted small">Shown on blog detail page.</div>
+                            <div class="text-muted small">Shown on Scientific News detail page.</div>
                         </div>
                     </div>
                     <label class="form-label" for="hero_file">Upload Hero</label>

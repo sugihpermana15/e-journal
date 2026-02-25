@@ -62,7 +62,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h6 class="mb-0">Content List</h6>
-                        <a href="pages-blog-create" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Add Blog</a>
+                        <a href="pages-blog-create" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Add Scientific News</a>
                     </div>
                     <div class="card-body">
                         <div class="table-box table-responsive">

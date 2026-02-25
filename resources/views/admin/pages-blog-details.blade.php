@@ -3,7 +3,7 @@
 @section('title', 'Page | FabKin Admin & Dashboards Template')
 
 @section('title-sub', 'Page')
-@section('pagetitle', 'Blog Details')
+@section('pagetitle', 'Scientific News Details')
 @section('content')
 
     <div id="layout-wrapper">
@@ -218,7 +218,7 @@
                                 <div class="d-flex gap-4 justify-content-between align-items-center">
                                     <div class="flex-shrink-0">
                                         <img src="assets/images/small/img-6.jpg"
-                                            class="rounded object-fit-cover h-80px w-80px" alt="Blog Image">
+                                            class="rounded object-fit-cover h-80px w-80px" alt="Scientific News Image">
                                     </div>
                                     <div class="flex-grow-1">
                                         <span class="text-muted d-block small">06 Nov 2025</span>
@@ -241,7 +241,7 @@
                                 <div class="d-flex gap-4 justify-content-between align-items-center">
                                     <div class="flex-shrink-0">
                                         <img src="assets/images/small/img-5.jpg"
-                                            class="rounded object-fit-cover h-80px w-80px" alt="Blog Image">
+                                            class="rounded object-fit-cover h-80px w-80px" alt="Scientific News Image">
                                     </div>
                                     <div class="flex-grow-1">
                                         <span class="text-muted d-block small">13 Oct 2025</span>
@@ -264,7 +264,7 @@
                                 <div class="d-flex gap-4 justify-content-between align-items-center">
                                     <div class="flex-shrink-0">
                                         <img src="assets/images/small/img-4.jpg"
-                                            class="rounded object-fit-cover h-80px w-80px" alt="Blog Image">
+                                            class="rounded object-fit-cover h-80px w-80px" alt="Scientific News Image">
                                     </div>
                                     <div class="flex-grow-1">
                                         <span class="text-muted d-block small">22 Oct 2025</span>
@@ -287,7 +287,7 @@
                                 <div class="d-flex gap-4 justify-content-between align-items-center">
                                     <div class="flex-shrink-0">
                                         <img src="assets/images/small/img-3.jpg"
-                                            class="rounded object-fit-cover h-80px w-80px" alt="Blog Image">
+                                            class="rounded object-fit-cover h-80px w-80px" alt="Scientific News Image">
                                     </div>
                                     <div class="flex-grow-1">
                                         <span class="text-muted d-block small">01 Nov 2025</span>
@@ -310,7 +310,7 @@
                                 <div class="d-flex gap-4 justify-content-between align-items-center">
                                     <div class="flex-shrink-0">
                                         <img src="assets/images/small/img-2.jpg"
-                                            class="rounded object-fit-cover h-80px w-80px" alt="Blog Image">
+                                            class="rounded object-fit-cover h-80px w-80px" alt="Scientific News Image">
                                     </div>
                                     <div class="flex-grow-1">
                                         <span class="text-muted d-block small">10 Sep 2025</span>

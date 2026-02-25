@@ -1,8 +1,8 @@
 @extends('admin.partials.Layouts.master')
 
-@section('title', 'Add Blog Category | Admin')
+@section('title', 'Add Scientific News Category | Admin')
 @section('title-sub', 'Content')
-@section('pagetitle', 'Add Blog Category')
+@section('pagetitle', 'Add Scientific News Category')
 
 @section('content')
     <div class="row">

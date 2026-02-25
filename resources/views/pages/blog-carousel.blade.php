@@ -1,12 +1,12 @@
 @extends('layouts.breadcrumbs')
-@section('title', 'Blog Carousel || Med Open Press')
+@section('title', 'Scientific News Carousel || Med Open Press')
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/css/module-css/blog.css') }}?v={{ filemtime(public_path('assets/css/module-css/blog.css')) }}"/>
 @endpush
 @php
     $bodyClass = 'custom-cursor';
-    $title = 'Blog Carousel';
-    $subtitle = 'Blog Carousel';
+    $title = 'Scientific News Carousel';
+    $subtitle = 'Scientific News Carousel';
 @endphp
 @section('content')
          <!--Blog Carousel page Start-->

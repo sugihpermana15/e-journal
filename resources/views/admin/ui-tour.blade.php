@@ -130,14 +130,14 @@
 
                 <section class="py-5 mt-5">
                     <div class="container">
-                        <h4 class="text-center mb-5 fw-semibold">Latest Blog</h4>
+                        <h4 class="text-center mb-5 fw-semibold">Latest Scientific News</h4>
                         <div class="row">
                             <div class="col-md-6 col-xl-4">
                                 <div class="card">
-                                    <img src="assets/images/small/img-1.jpg" class="card-img-top" alt="Blog Post 1">
+                                    <img src="assets/images/small/img-1.jpg" class="card-img-top" alt="Scientific News Post 1">
                                     <div class="card-body">
-                                        <h5 class="card-title">Blog Post Title 1</h5>
-                                        <p class="card-text">A brief description of the blog post goes here. It highlights
+                                        <h5 class="card-title">Scientific News Post Title 1</h5>
+                                        <p class="card-text">A brief description of the scientific news post goes here. It highlights
                                             key points and attracts readers.</p>
                                         <a href="javascript:void(0)" class="btn btn-primary">Read More</a>
                                     </div>
@@ -145,10 +145,10 @@
                             </div>
                             <div class="col-md-6 col-xl-4">
                                 <div class="card">
-                                    <img src="assets/images/small/img-2.jpg" class="card-img-top" alt="Blog Post 2">
+                                    <img src="assets/images/small/img-2.jpg" class="card-img-top" alt="Scientific News Post 2">
                                     <div class="card-body">
-                                        <h5 class="card-title">Blog Post Title 2</h5>
-                                        <p class="card-text">A brief description of the blog post goes here. It highlights
+                                        <h5 class="card-title">Scientific News Post Title 2</h5>
+                                        <p class="card-text">A brief description of the scientific news post goes here. It highlights
                                             key points and attracts readers.</p>
                                         <a href="javascript:void(0)" class="btn btn-primary">Read More</a>
                                     </div>
@@ -156,10 +156,10 @@
                             </div>
                             <div class="col-md-6 col-xl-4">
                                 <div class="card">
-                                    <img src="assets/images/small/img-3.jpg" class="card-img-top" alt="Blog Post 3">
+                                    <img src="assets/images/small/img-3.jpg" class="card-img-top" alt="Scientific News Post 3">
                                     <div class="card-body">
-                                        <h5 class="card-title">Blog Post Title 3</h5>
-                                        <p class="card-text">A brief description of the blog post goes here. It highlights
+                                        <h5 class="card-title">Scientific News Post Title 3</h5>
+                                        <p class="card-text">A brief description of the scientific news post goes here. It highlights
                                             key points and attracts readers.</p>
                                         <a href="javascript:void(0)" class="btn btn-primary">Read More</a>
                                     </div>

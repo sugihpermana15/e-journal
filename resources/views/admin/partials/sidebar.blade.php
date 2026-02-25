@@ -62,6 +62,12 @@
                 </a>
             </li>
             <li class="pe-slide">
+                <a href="{{ route('admin.contact.edit') }}" class="pe-nav-link">
+                    <i class="bi bi-telephone pe-nav-icon"></i>
+                    <span class="pe-nav-content">Contact Settings</span>
+                </a>
+            </li>
+            <li class="pe-slide">
                 <a href="{{ route('admin.ejournal.header.edit') }}" class="pe-nav-link">
                     <i class="bi bi-layout-text-window pe-nav-icon"></i>
                     <span class="pe-nav-content">Header Settings</span>
@@ -76,13 +82,13 @@
             <li class="pe-slide">
                 <a href="{{ route('admin.blog.posts.index') }}" class="pe-nav-link">
                     <i class="bi bi-newspaper pe-nav-icon"></i>
-                    <span class="pe-nav-content">Blog Posts</span>
+                    <span class="pe-nav-content">Scientific News Posts</span>
                 </a>
             </li>
             <li class="pe-slide">
                 <a href="{{ route('admin.blog.categories.index') }}" class="pe-nav-link">
                     <i class="bi bi-tags pe-nav-icon"></i>
-                    <span class="pe-nav-content">Blog Categories</span>
+                    <span class="pe-nav-content">Scientific News Categories</span>
                 </a>
             </li>
         </ul>
