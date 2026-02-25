@@ -44,7 +44,7 @@
         @endphp
         <section class="page-header">
             <div class="page-header__bg"
-                style="background-image: url({{ $breadcrumbBgUrl }});">
+                style="background-image: url({{ $breadcrumbBgUrl ?? asset('assets/images/backgrounds/page-header-bg.jpg') }});">
             </div>
             <div class="page-header__social">
                 @foreach($breadcrumbSocials as $s)
