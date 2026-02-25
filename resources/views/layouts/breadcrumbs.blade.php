@@ -47,7 +47,7 @@
                 style="background-image: url({{ $breadcrumbBgUrl ?? asset('assets/images/backgrounds/page-header-bg.jpg') }});">
             </div>
             <div class="page-header__social">
-                @foreach($breadcrumbSocials as $s)
+                @foreach(($breadcrumbSocials ?? []) as $s)
                     @php
                         $label = trim((string) data_get($s, 'label', ''));
                         $url = trim((string) data_get($s, 'url', ''));
