@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-@php($activeLocale = app()->getLocale())
+@php
+    $activeLocale = app()->getLocale();
+@endphp
 <html lang="{{ $activeLocale }}" dir="{{ $activeLocale === 'ar' ? 'rtl' : 'ltr' }}">
 
 <x-head/>
 <body class="custom-cursor">
-    @php($gtmId = (string) data_get(config('services.google_tag_manager', []), 'id', ''))
+    @php
+        $gtmId = (string) data_get(config('services.google_tag_manager', []), 'id', '');
+    @endphp
     @if(trim($gtmId) !== '')
         <!-- Google Tag Manager (noscript) -->
         <noscript>

@@ -267,7 +267,9 @@
                     </ul>
                 </div>
                 <div class="dropdown pe-dropdown-mega d-none d-md-block">
-                    @php($user = auth()->user())
+                    @php
+                        $user = auth()->user();
+                    @endphp
                     <button class="header-profile-btn btn gap-1 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="header-btn btn position-relative">
                             <img src="{{ \Laravolt\Avatar\Facade::create($user?->name ?? 'User')->toBase64() }}" alt="Avatar Image" class="img-fluid rounded-circle">

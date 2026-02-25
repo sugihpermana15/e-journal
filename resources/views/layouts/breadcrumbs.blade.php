@@ -4,7 +4,9 @@
 <x-head />
 
 <body class="{{ trim('custom-cursor ' . ($bodyClass ?? '')) }}">
-    @php($gtmId = (string) data_get(config('services.google_tag_manager', []), 'id', ''))
+    @php
+        $gtmId = (string) data_get(config('services.google_tag_manager', []), 'id', '');
+    @endphp
     @if(trim($gtmId) !== '')
         <!-- Google Tag Manager (noscript) -->
         <noscript>
