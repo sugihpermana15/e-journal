@@ -62,6 +62,12 @@
                 </a>
             </li>
             <li class="pe-slide">
+                <a href="{{ route('admin.services.edit') }}" class="pe-nav-link">
+                    <i class="bi bi-grid-1x2 pe-nav-icon"></i>
+                    <span class="pe-nav-content">Services Settings</span>
+                </a>
+            </li>
+            <li class="pe-slide">
                 <a href="{{ route('admin.contact.edit') }}" class="pe-nav-link">
                     <i class="bi bi-telephone pe-nav-icon"></i>
                     <span class="pe-nav-content">Contact Settings</span>

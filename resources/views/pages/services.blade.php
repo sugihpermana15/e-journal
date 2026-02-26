@@ -225,7 +225,10 @@
                                 $smallLabel = (string) data_get($tab, 'small_label', 'Learn');
                                 $smallSubLabel = (string) data_get($tab, 'small_sublabel', 'More');
                                 $btnText = (string) data_get($tab, 'button_text', 'Learn More');
-                                $btnUrl = (string) data_get($tab, 'button_url', route('services'));
+                                $rawBtnUrl = trim((string) data_get($tab, 'button_url', ''));
+                                $tabSlug = trim((string) data_get($tab, 'slug', ''));
+                                $linkSlug = $tabSlug !== '' ? $tabSlug : \Illuminate\Support\Str::slug($tabTitle);
+                                $btnUrl = $rawBtnUrl !== '' ? $rawBtnUrl : route('services-detail', ['slug' => $linkSlug]);
                             @endphp
                             <div class="tab {{ $idx === 0 ? 'active-tab' : '' }}" id="{{ $tabId }}">
                                 <div class="services-three__tab-content-box">

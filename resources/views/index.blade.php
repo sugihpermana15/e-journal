@@ -561,7 +561,14 @@
                                                     <span class="services-three__tab-doller-sub-title">{{ $smallSubLabel ?: 'More' }}</span>
                                                 </div>
                                                 <div class="services-three__btn-box">
-                                                    <a href="{{ data_get($tab, 'button_url') ?: route('services') }}" class="thm-btn">{{ data_get($tab, 'button_text') ?: 'Learn More' }}<span><i class="icon-diagonal-arrow"></i></span></a>
+                                                    @php
+                                                        $rawBtnUrl = trim((string) data_get($tab, 'button_url', ''));
+                                                        $tabSlug = trim((string) data_get($tab, 'slug', ''));
+                                                        $tabTitle = (string) data_get($tab, 'title', 'Service');
+                                                        $linkSlug = $tabSlug !== '' ? $tabSlug : \Illuminate\Support\Str::slug($tabTitle);
+                                                        $btnUrl = $rawBtnUrl !== '' ? $rawBtnUrl : route('services-detail', ['slug' => $linkSlug]);
+                                                    @endphp
+                                                    <a href="{{ $btnUrl }}" class="thm-btn">{{ data_get($tab, 'button_text') ?: 'Learn More' }}<span><i class="icon-diagonal-arrow"></i></span></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -590,7 +597,7 @@
                                             <span class="services-three__tab-doller-sub-title">Publishing</span>
                                         </div>
                                         <div class="services-three__btn-box">
-                                            <a href="{{ route('services') }}" class="thm-btn">Learn
+                                            <a href="{{ route('services-detail', ['slug' => 'journal-publication']) }}" class="thm-btn">Learn
                                                 More<span><i class="icon-diagonal-arrow"></i></span></a>
                                         </div>
                                     </div>
@@ -650,7 +657,7 @@
                                             <span class="services-three__tab-doller-sub-title">Compliance</span>
                                         </div>
                                         <div class="services-three__btn-box">
-                                            <a href="{{ route('services') }}" class="thm-btn">Learn More<span><i
+                                            <a href="{{ route('services-detail', ['slug' => 'ipr-management']) }}" class="thm-btn">Learn More<span><i
                                                         class="icon-diagonal-arrow"></i></span></a>
                                         </div>
                                     </div>
@@ -680,7 +687,7 @@
                                             <span class="services-three__tab-doller-sub-title">Solutions</span>
                                         </div>
                                         <div class="services-three__btn-box">
-                                            <a href="{{ route('services') }}" class="thm-btn">Learn More<span><i
+                                            <a href="{{ route('services-detail', ['slug' => 'custom-publishing']) }}" class="thm-btn">Learn More<span><i
                                                         class="icon-diagonal-arrow"></i></span></a>
                                         </div>
                                     </div>
@@ -710,7 +717,7 @@
                                             <span class="services-three__tab-doller-sub-title">Licensing</span>
                                         </div>
                                         <div class="services-three__btn-box">
-                                            <a href="{{ route('services') }}" class="thm-btn">Learn More<span><i
+                                            <a href="{{ route('services-detail', ['slug' => 'distribution-licensing']) }}" class="thm-btn">Learn More<span><i
                                                         class="icon-diagonal-arrow"></i></span></a>
                                         </div>
                                     </div>

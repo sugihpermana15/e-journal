@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\BlogPostController as AdminBlogPostController;
 use App\Http\Controllers\Admin\BlogCategoryController as AdminBlogCategoryController;
 use App\Http\Controllers\Admin\AboutPageController as AdminAboutPageController;
 use App\Http\Controllers\Admin\ContactPageController as AdminContactPageController;
+use App\Http\Controllers\Admin\ServicesPageController as AdminServicesPageController;
 use App\Http\Controllers\Admin\Ejournal\SettingsController as AdminEjournalSettingsController;
 use App\Http\Controllers\Admin\Ejournal\JournalController as AdminEjournalJournalController;
 use App\Http\Controllers\Admin\Ejournal\HeaderController as AdminEjournalHeaderController;
@@ -57,6 +58,9 @@ Route::prefix('admin')
 
         Route::get('contact-page', [AdminContactPageController::class, 'edit'])->name('contact.edit');
         Route::put('contact-page', [AdminContactPageController::class, 'update'])->name('contact.update');
+
+        Route::get('services-page', [AdminServicesPageController::class, 'edit'])->name('services.edit');
+        Route::put('services-page', [AdminServicesPageController::class, 'update'])->name('services.update');
 
         // E-Journal settings: accessible to all authenticated roles
         Route::prefix('ejournal')
