@@ -52,7 +52,14 @@
                                 </td>
                                 <td>
                                     <div class="d-flex flex-wrap gap-1">
-                                        <a href="{{ route('admin.blog.categories.edit', $category) }}" class="btn btn-warning btn-sm">Edit</a>
+                                        <button
+                                            type="button"
+                                            class="btn btn-warning btn-sm"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#editCategoryModal-{{ $category->id }}"
+                                        >
+                                            Edit
+                                        </button>
                                         <form method="POST" action="{{ route('admin.blog.categories.destroy', $category) }}" onsubmit="return confirm('Delete this category? Posts will be set to no category.')">
                                             @csrf
                                             @method('DELETE')
@@ -68,6 +75,89 @@
             </div>
         </div>
     </div>
+
+    @foreach($categories as $category)
+        <div class="modal fade" id="editCategoryModal-{{ $category->id }}" tabindex="-1" aria-labelledby="editCategoryModalLabel-{{ $category->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <form method="POST" action="{{ route('admin.blog.categories.update', $category) }}">
+                        @csrf
+                        @method('PUT')
+
+                        <input type="hidden" name="_modal" value="edit_category">
+                        <input type="hidden" name="_category_id" value="{{ $category->id }}">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editCategoryModalLabel-{{ $category->id }}">Edit Scientific News Category</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="edit_name_{{ $category->id }}">Name</label>
+                                        <input
+                                            id="edit_name_{{ $category->id }}"
+                                            name="name"
+                                            type="text"
+                                            value="{{ old('_modal') === 'edit_category' && (string) old('_category_id') === (string) $category->id ? old('name') : $category->name }}"
+                                            class="form-control @error('name') {{ old('_modal') === 'edit_category' && (string) old('_category_id') === (string) $category->id ? 'is-invalid' : '' }} @enderror"
+                                            placeholder="e.g. Cardiology"
+                                            required
+                                        >
+                                        @if (old('_modal') === 'edit_category' && (string) old('_category_id') === (string) $category->id)
+                                            @error('name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        @endif
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label" for="edit_slug_{{ $category->id }}">Slug (optional)</label>
+                                        <input
+                                            id="edit_slug_{{ $category->id }}"
+                                            name="slug"
+                                            type="text"
+                                            value="{{ old('_modal') === 'edit_category' && (string) old('_category_id') === (string) $category->id ? old('slug') : $category->slug }}"
+                                            class="form-control @error('slug') {{ old('_modal') === 'edit_category' && (string) old('_category_id') === (string) $category->id ? 'is-invalid' : '' }} @enderror"
+                                            placeholder="leave blank to keep or auto-generate"
+                                        >
+                                        @if (old('_modal') === 'edit_category' && (string) old('_category_id') === (string) $category->id)
+                                            @error('slug')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        @endif
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input
+                                            id="edit_is_active_{{ $category->id }}"
+                                            name="is_active"
+                                            type="checkbox"
+                                            value="1"
+                                            class="form-check-input"
+                                            {{ (
+                                                old('_modal') === 'edit_category' && (string) old('_category_id') === (string) $category->id
+                                                    ? old('is_active', (int) $category->is_active)
+                                                    : (int) $category->is_active
+                                            ) ? 'checked' : '' }}
+                                        >
+                                        <label class="form-check-label" for="edit_is_active_{{ $category->id }}">Active</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
     <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -90,14 +180,16 @@
                                         id="modal_name"
                                         name="name"
                                         type="text"
-                                        value="{{ old('name') }}"
-                                        class="form-control @error('name') is-invalid @enderror"
+                                        value="{{ old('_modal') === 'add_category' ? old('name') : '' }}"
+                                        class="form-control @error('name') {{ old('_modal') === 'add_category' ? 'is-invalid' : '' }} @enderror"
                                         placeholder="e.g. Cardiology"
                                         required
                                     >
-                                    @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    @if (old('_modal') === 'add_category')
+                                        @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    @endif
                                 </div>
 
                                 <div class="mb-3">
@@ -106,13 +198,15 @@
                                         id="modal_slug"
                                         name="slug"
                                         type="text"
-                                        value="{{ old('slug') }}"
-                                        class="form-control @error('slug') is-invalid @enderror"
+                                        value="{{ old('_modal') === 'add_category' ? old('slug') : '' }}"
+                                        class="form-control @error('slug') {{ old('_modal') === 'add_category' ? 'is-invalid' : '' }} @enderror"
                                         placeholder="leave blank to auto-generate"
                                     >
-                                    @error('slug')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    @if (old('_modal') === 'add_category')
+                                        @error('slug')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    @endif
                                 </div>
 
                                 <div class="form-check">
@@ -122,7 +216,7 @@
                                         type="checkbox"
                                         value="1"
                                         class="form-check-input"
-                                        {{ old('is_active', 1) ? 'checked' : '' }}
+                                        {{ (old('_modal') === 'add_category' ? old('is_active', 1) : 1) ? 'checked' : '' }}
                                     >
                                     <label class="form-check-label" for="modal_is_active">Active</label>
                                 </div>
@@ -185,6 +279,23 @@
                     new bootstrap.Modal(addModalEl).show();
                 }
             @endif
+
+            const oldModal = @json(old('_modal'));
+            const oldCategoryId = @json(old('_category_id'));
+            if (oldModal === 'edit_category' && oldCategoryId && window.bootstrap?.Modal) {
+                const editModalEl = document.getElementById(`editCategoryModal-${oldCategoryId}`);
+                if (editModalEl) {
+                    new bootstrap.Modal(editModalEl).show();
+                }
+            }
+
+            const openEditCategoryId = @json(session('open_edit_category_id'));
+            if (openEditCategoryId && window.bootstrap?.Modal) {
+                const editModalEl = document.getElementById(`editCategoryModal-${openEditCategoryId}`);
+                if (editModalEl) {
+                    new bootstrap.Modal(editModalEl).show();
+                }
+            }
         });
     </script>
 @endsection

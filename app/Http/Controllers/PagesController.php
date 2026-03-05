@@ -322,10 +322,17 @@ class PagesController extends Controller
 
         $categoryModel = $categoryQuery->firstOrFail();
 
-        $categoryPostsCount = BlogPost::query()
-            ->where('is_published', true)
-            ->where('category_id', $categoryModel->id)
-            ->count();
+        $categoryPostsQuery = BlogPost::query()->where('category_id', $categoryModel->id);
+        $this->applyBlogPublishedFilter($categoryPostsQuery);
+        $categoryPostsCount = $categoryPostsQuery->count();
+
+        $categoryPosts = $this->paginatePosts(
+            $this->getBlogPostsFromDatabaseByQuery(
+                BlogPost::query()->with('blogCategory')->where('category_id', $categoryModel->id)
+            ),
+            $request,
+            4
+        );
 
         $sidebarCategoriesQuery = BlogCategory::query();
         if (Schema::hasColumn('blog_categories', 'is_active')) {
@@ -346,8 +353,26 @@ class PagesController extends Controller
                 'hero' => 'assets/images/blog/blog-details-img-1.jpg',
             ],
             'categoryPostsCount' => $categoryPostsCount,
+            'categoryPosts' => $categoryPosts,
             'sidebarCategories' => $sidebarCategories,
         ]);
+    }
+
+    private function getBlogPostsFromDatabaseByQuery($query): array
+    {
+        $this->applyBlogPublishedFilter($query);
+
+        $posts = $query
+            ->orderByDesc('published_at')
+            ->orderByDesc('created_at')
+            ->limit(200)
+            ->get();
+
+        if ($posts->count() === 0) {
+            return [];
+        }
+
+        return $posts->map(fn (BlogPost $post) => $this->mapDbBlogPostToCard($post))->all();
     }
 
     public function set_locale(Request $request, string $locale)
@@ -381,7 +406,7 @@ class PagesController extends Controller
         return $query
             ->withCount([
                 'posts as published_posts_count' => function ($q) {
-                    $q->where('is_published', true);
+                    $this->applyBlogPublishedFilter($q);
                 },
             ])
             ->orderBy('name')
@@ -390,9 +415,11 @@ class PagesController extends Controller
 
     private function getBlogPostsFromDatabase(): array
     {
-        $posts = BlogPost::query()
-            ->with('blogCategory')
-            ->where('is_published', true)
+        $query = BlogPost::query()->with('blogCategory');
+
+        $this->applyBlogPublishedFilter($query);
+
+        $posts = $query
             ->orderByDesc('published_at')
             ->orderByDesc('created_at')
             ->limit(200)
@@ -426,7 +453,8 @@ class PagesController extends Controller
 
     private function findBlogPostModelForDetail(?string $slug): ?BlogPost
     {
-        $query = BlogPost::query()->with('blogCategory')->where('is_published', true);
+        $query = BlogPost::query()->with('blogCategory');
+        $this->applyBlogPublishedFilter($query);
 
         $post = null;
         if (is_string($slug) && trim($slug) !== '') {
@@ -451,8 +479,10 @@ class PagesController extends Controller
         $next = null;
 
         if ($sortDate) {
-            $prev = BlogPost::query()
-                ->where('is_published', true)
+            $prevQuery = BlogPost::query();
+            $this->applyBlogPublishedFilter($prevQuery);
+
+            $prev = $prevQuery
                 ->where('id', '!=', $post->id)
                 ->where(function ($q) use ($sortDate) {
                     $q->where('published_at', '<', $sortDate)
@@ -464,8 +494,10 @@ class PagesController extends Controller
                 ->orderByDesc('created_at')
                 ->first();
 
-            $next = BlogPost::query()
-                ->where('is_published', true)
+            $nextQuery = BlogPost::query();
+            $this->applyBlogPublishedFilter($nextQuery);
+
+            $next = $nextQuery
                 ->where('id', '!=', $post->id)
                 ->where(function ($q) use ($sortDate) {
                     $q->where('published_at', '>', $sortDate)
@@ -486,9 +518,16 @@ class PagesController extends Controller
 
     private function mapDbBlogPostToCard(BlogPost $post): array
     {
-        $hero = $post->hero_image_path
-            ? 'storage/' . ltrim($post->hero_image_path, '/')
-            : 'assets/images/blog/blog-list-1-1.jpg';
+        $cardImage = null;
+        if (is_string($post->hero_image_path) && trim($post->hero_image_path) !== '') {
+            $cardImage = 'storage/' . ltrim($post->hero_image_path, '/');
+        } elseif (is_string($post->detail_gallery_image_1_path) && trim($post->detail_gallery_image_1_path) !== '') {
+            $cardImage = 'storage/' . ltrim($post->detail_gallery_image_1_path, '/');
+        } elseif (is_string($post->detail_feature_image_path) && trim($post->detail_feature_image_path) !== '') {
+            $cardImage = 'storage/' . ltrim($post->detail_feature_image_path, '/');
+        }
+
+        $cardImage = $cardImage ?: 'assets/images/blog/blog-list-1-1.jpg';
 
         $authorImage = $post->author_image_path
             ? 'storage/' . ltrim($post->author_image_path, '/')
@@ -498,13 +537,20 @@ class PagesController extends Controller
             ? $post->published_at->format('F Y')
             : ($post->created_at?->format('F Y') ?? '—');
 
+        $dateForBadge = $post->published_at ?? $post->created_at;
+        $day = $dateForBadge ? $dateForBadge->format('d') : '01';
+        $month = $dateForBadge ? strtoupper($dateForBadge->format('M')) : 'JAN';
+
         $categorySlug = null;
+        $categoryLabel = null;
         if ($post->relationLoaded('blogCategory') && $post->blogCategory) {
             $categorySlug = $post->blogCategory->slug;
+            $categoryLabel = $post->blogCategory->name;
         }
         if (!is_string($categorySlug) || trim($categorySlug) === '') {
             $legacy = trim((string) ($post->category ?? ''));
             $categorySlug = $legacy !== '' ? Str::slug($legacy) : null;
+            $categoryLabel = $categoryLabel ?: ($legacy !== '' ? $legacy : null);
         }
 
         return [
@@ -512,22 +558,32 @@ class PagesController extends Controller
             'excerpt' => (string) ($post->excerpt ?? ''),
             'tags' => (array) ($post->tags ?? []),
             'published' => $published,
+            'day' => $day,
+            'month' => $month,
             'comments' => '0 Comments',
-            'image' => $hero,
+            'image' => $cardImage,
             'author' => (string) ($post->author_name ?? 'Med Open Press'),
             'author_image' => $authorImage,
             'link_url' => route('blog-details', ['slug' => $post->slug]),
             'variant' => $post->hero_image_path ? 'with-image' : 'no-image',
             'category' => $categorySlug,
+            'category_label' => $categoryLabel,
             'slug' => $post->slug,
         ];
     }
 
     private function mapDbBlogPostToDetail(BlogPost $post): array
     {
-        $hero = $post->hero_image_path
-            ? 'storage/' . ltrim($post->hero_image_path, '/')
-            : 'assets/images/blog/blog-details-img-1.jpg';
+        $hero = null;
+        if (is_string($post->hero_image_path) && trim($post->hero_image_path) !== '') {
+            $hero = 'storage/' . ltrim($post->hero_image_path, '/');
+        } elseif (is_string($post->detail_gallery_image_1_path) && trim($post->detail_gallery_image_1_path) !== '') {
+            $hero = 'storage/' . ltrim($post->detail_gallery_image_1_path, '/');
+        } elseif (is_string($post->detail_feature_image_path) && trim($post->detail_feature_image_path) !== '') {
+            $hero = 'storage/' . ltrim($post->detail_feature_image_path, '/');
+        }
+
+        $hero = $hero ?: 'assets/images/blog/blog-details-img-1.jpg';
 
         $authorImage = $post->author_image_path
             ? 'storage/' . ltrim($post->author_image_path, '/')
@@ -539,11 +595,9 @@ class PagesController extends Controller
 
         $gallery1 = $post->detail_gallery_image_1_path
             ? 'storage/' . ltrim($post->detail_gallery_image_1_path, '/')
-            : 'assets/images/blog/blog-details-img-box-img-1.jpg';
+            : '';
 
-        $gallery2 = $post->detail_gallery_image_2_path
-            ? 'storage/' . ltrim($post->detail_gallery_image_2_path, '/')
-            : 'assets/images/blog/blog-details-img-box-img-2.jpg';
+        $gallery1Caption = trim((string) ($post->detail_gallery_image_1_caption ?? ''));
 
         $quoteAuthorImage = $post->detail_quote_author_image_path
             ? 'storage/' . ltrim($post->detail_quote_author_image_path, '/')
@@ -553,6 +607,27 @@ class PagesController extends Controller
             ? 'storage/' . ltrim($post->detail_feature_image_path, '/')
             : 'assets/images/blog/blog-details-points-img-1.jpg';
 
+        $sectionsRaw = $post->content_sections;
+        $sectionsRaw = is_array($sectionsRaw) ? $sectionsRaw : [];
+        $sections = [];
+        foreach ($sectionsRaw as $section) {
+            if (!is_array($section)) {
+                continue;
+            }
+
+            $title = trim((string) ($section['title'] ?? ''));
+            $text = trim((string) ($section['text'] ?? ''));
+
+            if ($title === '' && $text === '') {
+                continue;
+            }
+
+            $sections[] = [
+                'title' => $title,
+                'text' => $text,
+            ];
+        }
+
         return [
             'title' => (string) $post->title,
             'slug' => (string) $post->slug,
@@ -560,6 +635,7 @@ class PagesController extends Controller
             'tags' => (array) ($post->tags ?? []),
             'excerpt' => (string) ($post->excerpt ?? ''),
             'content' => (string) ($post->content ?? ''),
+            'sections' => $sections,
             'hero' => $hero,
             'author' => (string) ($post->author_name ?? 'Med Open Press'),
             'author_image' => $authorImage,
@@ -567,7 +643,7 @@ class PagesController extends Controller
             'comments' => '0 Comments',
 
             'gallery_image_1' => $gallery1,
-            'gallery_image_2' => $gallery2,
+            'gallery_image_1_caption' => $gallery1Caption,
             'detail_title_2' => (string) ($post->detail_title_2 ?? ''),
             'detail_text_2' => (string) ($post->detail_text_2 ?? ''),
             'detail_text_3' => (string) ($post->detail_text_3 ?? ''),
@@ -595,8 +671,14 @@ class PagesController extends Controller
     {
         $collection = Collection::make($posts);
 
-        $page = max(1, (int) $request->query('page', 1));
         $total = $collection->count();
+        $lastPage = max(1, (int) ceil($total / max(1, $perPage)));
+
+        $page = max(1, (int) $request->query('page', 1));
+        if ($page > $lastPage) {
+            $page = $lastPage;
+        }
+
         $items = $collection->slice(($page - 1) * $perPage, $perPage)->values();
 
         return new LengthAwarePaginator(
@@ -609,5 +691,29 @@ class PagesController extends Controller
                 'query' => $request->query(),
             ]
         );
+    }
+
+    private function applyBlogPublishedFilter($query): void
+    {
+        if (!Schema::hasColumn('blog_posts', 'is_published')) {
+            return;
+        }
+
+        $query->where(function ($q) {
+            $q->where('is_published', true)
+                ->orWhere('is_published', 1)
+                ->orWhere('is_published', '1')
+                ->orWhereIn('is_published', [
+                    'true',
+                    'TRUE',
+                    'True',
+                    'yes',
+                    'YES',
+                    'Yes',
+                    'published',
+                    'PUBLISHED',
+                    'Published',
+                ]);
+        });
     }
 }

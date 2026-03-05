@@ -68,6 +68,12 @@
                 </a>
             </li>
             <li class="pe-slide">
+                <a href="{{ route('admin.ejournal.services.index') }}" class="pe-nav-link">
+                    <i class="bi bi-list-check pe-nav-icon"></i>
+                    <span class="pe-nav-content">Services (CRUD)</span>
+                </a>
+            </li>
+            <li class="pe-slide">
                 <a href="{{ route('admin.contact.edit') }}" class="pe-nav-link">
                     <i class="bi bi-telephone pe-nav-icon"></i>
                     <span class="pe-nav-content">Contact Settings</span>

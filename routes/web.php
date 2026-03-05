@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ServicesPageController as AdminServicesPageContro
 use App\Http\Controllers\Admin\Ejournal\SettingsController as AdminEjournalSettingsController;
 use App\Http\Controllers\Admin\Ejournal\JournalController as AdminEjournalJournalController;
 use App\Http\Controllers\Admin\Ejournal\HeaderController as AdminEjournalHeaderController;
+use App\Http\Controllers\Admin\Ejournal\ServiceController as AdminEjournalServiceController;
 
 
 ////////// Home
@@ -88,6 +89,13 @@ Route::prefix('admin')
                     Route::post('journals', [AdminEjournalJournalController::class, 'store'])->name('journals.store');
                     Route::put('journals/{journal}', [AdminEjournalJournalController::class, 'update'])->name('journals.update');
                     Route::delete('journals/{journal}', [AdminEjournalJournalController::class, 'destroy'])->name('journals.destroy');
+
+                    Route::get('services', [AdminEjournalServiceController::class, 'index'])->name('services.index');
+                    Route::get('services/create', [AdminEjournalServiceController::class, 'create'])->name('services.create');
+                    Route::post('services', [AdminEjournalServiceController::class, 'store'])->name('services.store');
+                    Route::get('services/{service}/edit', [AdminEjournalServiceController::class, 'edit'])->name('services.edit');
+                    Route::put('services/{service}', [AdminEjournalServiceController::class, 'update'])->name('services.update');
+                    Route::delete('services/{service}', [AdminEjournalServiceController::class, 'destroy'])->name('services.destroy');
                 });
 
             Route::prefix('blog')

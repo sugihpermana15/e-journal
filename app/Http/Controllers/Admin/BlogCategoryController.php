@@ -48,7 +48,9 @@ class BlogCategoryController extends Controller
 
     public function edit(BlogCategory $category)
     {
-        return view('admin.blog.categories.edit', compact('category'));
+        return redirect()
+            ->route('admin.blog.categories.index')
+            ->with('open_edit_category_id', $category->id);
     }
 
     public function update(Request $request, BlogCategory $category)

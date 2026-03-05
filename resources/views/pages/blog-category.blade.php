@@ -76,6 +76,92 @@
                                     </div>
                                 </div>
                             </div>
+
+                            @php
+                                $categoryPosts = $categoryPosts ?? null;
+                            @endphp
+
+                            @if($categoryPosts && $categoryPosts->count())
+                                <div class="blog-one__bottom" style="margin-top: 40px;">
+                                    <div class="row">
+                                        @foreach($categoryPosts as $i => $post)
+                                            @php
+                                                $img = (string) data_get($post, 'image', 'assets/images/blog/blog-1-1.jpg');
+                                                $link = (string) data_get($post, 'link_url', route('blog-details'));
+                                                $day = (string) data_get($post, 'day', '01');
+                                                $month = (string) data_get($post, 'month', 'JAN');
+                                                $text = (string) data_get($post, 'excerpt', '');
+                                                $postTitle = (string) data_get($post, 'title', '');
+                                                $tagLabel = (string) data_get($category ?? [], 'label', '');
+                                                $isAlt = ((int) $i) % 2 === 1;
+                                            @endphp
+                                            <div class="col-xl-6 col-lg-6 col-md-6" style="margin-bottom: 30px;">
+                                                <div class="blog-one__single">
+                                                    @if(!$isAlt)
+                                                        <div class="blog-one__img-box">
+                                                            <div class="blog-one__img">
+                                                                <img src="{{ asset($img) }}" alt="{{ e($postTitle) }}">
+                                                            </div>
+                                                            <div class="blog-one__date">
+                                                                <p>{{ $day }}</p>
+                                                                <span>{{ $month }}</span>
+                                                            </div>
+                                                            @if($tagLabel !== '')
+                                                                <ul class="list-unstyled blog-one__tag">
+                                                                    <li><a href="{{ route('blog-category', ['category' => $categoryKey]) }}">{{ $tagLabel }}</a></li>
+                                                                </ul>
+                                                            @endif
+                                                        </div>
+                                                        <div class="blog-one__content">
+                                                            <h3 class="blog-one__title"><a href="{{ $link }}">{{ $postTitle }}</a></h3>
+                                                            @if(trim($text) !== '')
+                                                                <p class="blog-one__text">{{ $text }}</p>
+                                                            @endif
+                                                        </div>
+                                                    @else
+                                                        <div class="blog-one__content blog-one__content--two">
+                                                            <h3 class="blog-one__title"><a href="{{ $link }}">{{ $postTitle }}</a></h3>
+                                                            @if(trim($text) !== '')
+                                                                <p class="blog-one__text">{{ $text }}</p>
+                                                            @endif
+                                                        </div>
+                                                        <div class="blog-one__img-box">
+                                                            <div class="blog-one__img">
+                                                                <img src="{{ asset($img) }}" alt="{{ e($postTitle) }}">
+                                                            </div>
+                                                            <div class="blog-one__date">
+                                                                <p>{{ $day }}</p>
+                                                                <span>{{ $month }}</span>
+                                                            </div>
+                                                            @if($tagLabel !== '')
+                                                                <ul class="list-unstyled blog-one__tag">
+                                                                    <li><a href="{{ route('blog-category', ['category' => $categoryKey]) }}">{{ $tagLabel }}</a></li>
+                                                                </ul>
+                                                            @endif
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+
+                                    @if($categoryPosts->lastPage() > 1)
+                                        <div class="blog-list__pagination" style="padding-top: 10px;">
+                                            <ul class="pg-pagination list-unstyled">
+                                                <li class="prev">
+                                                    <a href="{{ $categoryPosts->previousPageUrl() ?? $categoryPosts->url(1) }}" aria-label="prev"><i class="fas fa-arrow-left"></i></a>
+                                                </li>
+                                                @for($page = 1; $page <= $categoryPosts->lastPage(); $page++)
+                                                    <li class="count {{ $page === $categoryPosts->currentPage() ? 'active' : '' }}"><a href="{{ $categoryPosts->url($page) }}">{{ str_pad((string)$page, 2, '0', STR_PAD_LEFT) }}</a></li>
+                                                @endfor
+                                                <li class="next">
+                                                    <a href="{{ $categoryPosts->nextPageUrl() ?? $categoryPosts->url($categoryPosts->lastPage()) }}" aria-label="Next"><i class="fas fa-arrow-right"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

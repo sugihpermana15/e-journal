@@ -566,7 +566,17 @@
                                                         $tabSlug = trim((string) data_get($tab, 'slug', ''));
                                                         $tabTitle = (string) data_get($tab, 'title', 'Service');
                                                         $linkSlug = $tabSlug !== '' ? $tabSlug : \Illuminate\Support\Str::slug($tabTitle);
-                                                        $btnUrl = $rawBtnUrl !== '' ? $rawBtnUrl : route('services-detail', ['slug' => $linkSlug]);
+
+                                                        $btnUrl = route('services-detail', ['slug' => $linkSlug]);
+                                                        if ($rawBtnUrl !== '') {
+                                                            $isExternalOrAnchor = preg_match('~^(https?:)?//~i', $rawBtnUrl)
+                                                                || preg_match('~^(mailto:|tel:)~i', $rawBtnUrl)
+                                                                || str_starts_with($rawBtnUrl, '#');
+
+                                                            $btnUrl = $isExternalOrAnchor
+                                                                ? $rawBtnUrl
+                                                                : url(ltrim($rawBtnUrl, '/'));
+                                                        }
                                                     @endphp
                                                     <a href="{{ $btnUrl }}" class="thm-btn">{{ data_get($tab, 'button_text') ?: 'Learn More' }}<span><i class="icon-diagonal-arrow"></i></span></a>
                                                 </div>

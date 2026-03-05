@@ -44,6 +44,10 @@
                 ];
             }
         @endphp
+        @php
+            $breadcrumbBgUrl = $breadcrumbBgUrl ?? asset('assets/images/backgrounds/page-header-bg.jpg');
+            $breadcrumbSocials = $breadcrumbSocials ?? [];
+        @endphp
         <section class="page-header">
             <div class="page-header__bg"
                 style="background-image: url({{ $breadcrumbBgUrl ?? asset('assets/images/backgrounds/page-header-bg.jpg') }});">

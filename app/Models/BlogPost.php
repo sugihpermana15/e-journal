@@ -18,7 +18,9 @@ class BlogPost extends Model
         'hero_image_path',
         'excerpt',
         'content',
+        'content_sections',
         'detail_gallery_image_1_path',
+        'detail_gallery_image_1_caption',
         'detail_gallery_image_2_path',
         'detail_title_2',
         'detail_text_2',
@@ -47,6 +49,7 @@ class BlogPost extends Model
 
     protected $casts = [
         'tags' => 'array',
+        'content_sections' => 'array',
         'detail_points' => 'array',
         'detail_feature_points' => 'array',
         'is_published' => 'boolean',

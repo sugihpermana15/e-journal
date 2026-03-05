@@ -17,22 +17,16 @@
         ? asset('storage/' . ltrim($post->detail_gallery_image_1_path, '/'))
         : asset('assets/images/blog/blog-details-img-box-img-1.jpg');
 
-    $gallery2Url = $isEdit && $post->detail_gallery_image_2_path
-        ? asset('storage/' . ltrim($post->detail_gallery_image_2_path, '/'))
-        : asset('assets/images/blog/blog-details-img-box-img-2.jpg');
-
-    $quoteAuthorImageUrl = $isEdit && $post->detail_quote_author_image_path
-        ? asset('storage/' . ltrim($post->detail_quote_author_image_path, '/'))
-        : asset('assets/images/blog/blog-details-quote-client-img-1.jpg');
-
-    $featureImageUrl = $isEdit && $post->detail_feature_image_path
-        ? asset('storage/' . ltrim($post->detail_feature_image_path, '/'))
-        : asset('assets/images/blog/blog-details-points-img-1.jpg');
-
     $tagsLines = $isEdit ? implode("|", (array) ($post->tags ?? [])) : '';
 
-    $detailPointsLines = $isEdit ? implode("\n", (array) ($post->detail_points ?? [])) : '';
-    $detailFeaturePointsLines = $isEdit ? implode("\n", (array) ($post->detail_feature_points ?? [])) : '';
+    $contentSections = old(
+        'content_sections',
+        $isEdit ? (array) ($post->content_sections ?? []) : []
+    );
+    if (!is_array($contentSections)) {
+        $contentSections = [];
+    }
+    $contentSections = array_values(array_filter($contentSections, fn ($s) => is_array($s)));
 @endphp
 
 <div class="row">
@@ -150,291 +144,121 @@
         </div>
 
         <div class="card mt-3">
-            <div class="card-header">
-                <div class="fw-semibold">Scientific News Details Template</div>
-                <div class="text-muted small">Optional. Fill to match the existing Scientific News details design.</div>
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="fw-semibold">Content Sections</div>
+                    <div class="text-muted small">Tambah section + text sebanyak yang dibutuhkan (sesuai dokumen).</div>
+                </div>
+                <button type="button" class="btn btn-primary btn-sm" id="addContentSectionBtn">Add Section</button>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <img src="{{ $gallery1Url }}" alt="" style="width: 56px; height: 56px; object-fit: cover; border-radius: 8px;">
-                            <div>
-                                <div class="fw-semibold">Gallery image 1</div>
-                                <div class="text-muted small">Left image in the 2-image block.</div>
+                @error('content_sections')
+                <div class="alert alert-danger mb-3">{{ $message }}</div>
+                @enderror
+
+                <div id="contentSectionsContainer">
+                    @forelse($contentSections as $i => $section)
+                        @php
+                            $sectionTitle = (string) ($section['title'] ?? '');
+                            $sectionText = (string) ($section['text'] ?? '');
+                        @endphp
+                        <div class="border rounded p-3 mb-3 content-section-item" data-index="{{ $i }}">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <div class="fw-semibold">Section {{ $i + 1 }}</div>
+                                <button type="button" class="btn btn-outline-danger btn-sm removeContentSectionBtn">Remove</button>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Section Title</label>
+                                <input
+                                    type="text"
+                                    name="content_sections[{{ $i }}][title]"
+                                    value="{{ old('content_sections.' . $i . '.title', $sectionTitle) }}"
+                                    class="form-control @error('content_sections.' . $i . '.title') is-invalid @enderror"
+                                    maxlength="255"
+                                >
+                                @error('content_sections.' . $i . '.title')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-0">
+                                <label class="form-label">Section Text</label>
+                                <textarea
+                                    name="content_sections[{{ $i }}][text]"
+                                    rows="5"
+                                    class="form-control @error('content_sections.' . $i . '.text') is-invalid @enderror"
+                                >{{ old('content_sections.' . $i . '.text', $sectionText) }}</textarea>
+                                @error('content_sections.' . $i . '.text')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
-                        <label class="form-label" for="detail_gallery_image_1_file">Upload Gallery Image 1</label>
-                        <input
-                            id="detail_gallery_image_1_file"
-                            name="detail_gallery_image_1_file"
-                            type="file"
-                            class="form-control @error('detail_gallery_image_1_file') is-invalid @enderror"
-                            accept="image/*"
-                        >
-                        @error('detail_gallery_image_1_file')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+                    @empty
+                        <div class="text-muted" id="noContentSectionsHint">Belum ada section. Klik “Add Section” untuk menambah.</div>
+                    @endforelse
+                </div>
 
-                    <div class="col-md-6 mb-3">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <img src="{{ $gallery2Url }}" alt="" style="width: 56px; height: 56px; object-fit: cover; border-radius: 8px;">
-                            <div>
-                                <div class="fw-semibold">Gallery image 2</div>
-                                <div class="text-muted small">Right image in the 2-image block.</div>
-                            </div>
+                <template id="contentSectionTemplate">
+                    <div class="border rounded p-3 mb-3 content-section-item" data-index="__INDEX__">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <div class="fw-semibold">Section __NUMBER__</div>
+                            <button type="button" class="btn btn-outline-danger btn-sm removeContentSectionBtn">Remove</button>
                         </div>
-                        <label class="form-label" for="detail_gallery_image_2_file">Upload Gallery Image 2</label>
-                        <input
-                            id="detail_gallery_image_2_file"
-                            name="detail_gallery_image_2_file"
-                            type="file"
-                            class="form-control @error('detail_gallery_image_2_file') is-invalid @enderror"
-                            accept="image/*"
-                        >
-                        @error('detail_gallery_image_2_file')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label" for="detail_title_2">Section Title 2</label>
-                        <input
-                            id="detail_title_2"
-                            name="detail_title_2"
-                            type="text"
-                            value="{{ old('detail_title_2', $isEdit ? $post->detail_title_2 : '') }}"
-                            class="form-control @error('detail_title_2') is-invalid @enderror"
-                        >
-                        @error('detail_title_2')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label" for="detail_title_3">Section Title 3</label>
-                        <input
-                            id="detail_title_3"
-                            name="detail_title_3"
-                            type="text"
-                            value="{{ old('detail_title_3', $isEdit ? $post->detail_title_3 : '') }}"
-                            class="form-control @error('detail_title_3') is-invalid @enderror"
-                        >
-                        @error('detail_title_3')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
+                        <div class="mb-3">
+                            <label class="form-label">Section Title</label>
+                            <input type="text" name="content_sections[__INDEX__][title]" class="form-control" maxlength="255">
+                        </div>
 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label" for="detail_title_4">Section Title 4</label>
-                        <input
-                            id="detail_title_4"
-                            name="detail_title_4"
-                            type="text"
-                            value="{{ old('detail_title_4', $isEdit ? $post->detail_title_4 : '') }}"
-                            class="form-control @error('detail_title_4') is-invalid @enderror"
-                        >
-                        @error('detail_title_4')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <div class="mb-0">
+                            <label class="form-label">Section Text</label>
+                            <textarea name="content_sections[__INDEX__][text]" rows="5" class="form-control"></textarea>
+                        </div>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label" for="detail_title_5">Section Title 5</label>
-                        <input
-                            id="detail_title_5"
-                            name="detail_title_5"
-                            type="text"
-                            value="{{ old('detail_title_5', $isEdit ? $post->detail_title_5 : '') }}"
-                            class="form-control @error('detail_title_5') is-invalid @enderror"
-                        >
-                        @error('detail_title_5')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
+                </template>
+            </div>
+        </div>
 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label" for="detail_text_2">Text 2</label>
-                        <textarea
-                            id="detail_text_2"
-                            name="detail_text_2"
-                            rows="3"
-                            class="form-control @error('detail_text_2') is-invalid @enderror"
-                        >{{ old('detail_text_2', $isEdit ? $post->detail_text_2 : '') }}</textarea>
-                        @error('detail_text_2')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label" for="detail_text_5">Text 5</label>
-                        <textarea
-                            id="detail_text_5"
-                            name="detail_text_5"
-                            rows="3"
-                            class="form-control @error('detail_text_5') is-invalid @enderror"
-                        >{{ old('detail_text_5', $isEdit ? $post->detail_text_5 : '') }}</textarea>
-                        @error('detail_text_5')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label" for="detail_text_3">Text 3</label>
-                        <textarea
-                            id="detail_text_3"
-                            name="detail_text_3"
-                            rows="3"
-                            class="form-control @error('detail_text_3') is-invalid @enderror"
-                        >{{ old('detail_text_3', $isEdit ? $post->detail_text_3 : '') }}</textarea>
-                        @error('detail_text_3')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label" for="detail_text_4">Text 4</label>
-                        <textarea
-                            id="detail_text_4"
-                            name="detail_text_4"
-                            rows="3"
-                            class="form-control @error('detail_text_4') is-invalid @enderror"
-                        >{{ old('detail_text_4', $isEdit ? $post->detail_text_4 : '') }}</textarea>
-                        @error('detail_text_4')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="detail_points_lines">Points list (one per line)</label>
-                    <textarea
-                        id="detail_points_lines"
-                        name="detail_points_lines"
-                        rows="3"
-                        class="form-control @error('detail_points_lines') is-invalid @enderror"
-                        placeholder="Scenario testing\nRisk anticipation\nTeam alignment"
-                    >{{ old('detail_points_lines', $detailPointsLines) }}</textarea>
-                    @error('detail_points_lines')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="row">
-                    <div class="col-md-8 mb-3">
-                        <label class="form-label" for="detail_quote_text">Quote text</label>
-                        <textarea
-                            id="detail_quote_text"
-                            name="detail_quote_text"
-                            rows="2"
-                            class="form-control @error('detail_quote_text') is-invalid @enderror"
-                        >{{ old('detail_quote_text', $isEdit ? $post->detail_quote_text : '') }}</textarea>
-                        @error('detail_quote_text')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label" for="detail_quote_author_name">Quote author</label>
-                        <input
-                            id="detail_quote_author_name"
-                            name="detail_quote_author_name"
-                            type="text"
-                            value="{{ old('detail_quote_author_name', $isEdit ? $post->detail_quote_author_name : '') }}"
-                            class="form-control @error('detail_quote_author_name') is-invalid @enderror"
-                        >
-                        @error('detail_quote_author_name')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
+        <div class="card mt-3">
+            <div class="card-header">
+                <div class="fw-semibold">Scientific News Media &amp; Share</div>
+                <div class="text-muted small">Optional.</div>
+            </div>
+            <div class="card-body">
                 <div class="mb-3">
                     <div class="d-flex align-items-center gap-2 mb-2">
-                        <img src="{{ $quoteAuthorImageUrl }}" alt="" style="width: 56px; height: 56px; object-fit: cover; border-radius: 50%;">
+                        <img src="{{ $gallery1Url }}" alt="" style="width: 56px; height: 56px; object-fit: cover; border-radius: 8px;">
                         <div>
-                            <div class="fw-semibold">Quote author image</div>
-                            <div class="text-muted small">Shown inside the quote box.</div>
+                            <div class="fw-semibold">Content image</div>
+                            <div class="text-muted small">Shown inside the article body (single image).</div>
                         </div>
                     </div>
-                    <label class="form-label" for="detail_quote_author_image_file">Upload Quote Author Image</label>
+                    <label class="form-label" for="detail_gallery_image_1_file">Upload Content Image</label>
                     <input
-                        id="detail_quote_author_image_file"
-                        name="detail_quote_author_image_file"
+                        id="detail_gallery_image_1_file"
+                        name="detail_gallery_image_1_file"
                         type="file"
-                        class="form-control @error('detail_quote_author_image_file') is-invalid @enderror"
+                        class="form-control @error('detail_gallery_image_1_file') is-invalid @enderror"
                         accept="image/*"
                     >
-                    @error('detail_quote_author_image_file')
+                    @error('detail_gallery_image_1_file')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label" for="detail_text_6">Text 6</label>
-                        <textarea
-                            id="detail_text_6"
-                            name="detail_text_6"
-                            rows="3"
-                            class="form-control @error('detail_text_6') is-invalid @enderror"
-                        >{{ old('detail_text_6', $isEdit ? $post->detail_text_6 : '') }}</textarea>
-                        @error('detail_text_6')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label" for="detail_text_7">Text 7</label>
-                        <textarea
-                            id="detail_text_7"
-                            name="detail_text_7"
-                            rows="3"
-                            class="form-control @error('detail_text_7') is-invalid @enderror"
-                        >{{ old('detail_text_7', $isEdit ? $post->detail_text_7 : '') }}</textarea>
-                        @error('detail_text_7')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <img src="{{ $featureImageUrl }}" alt="" style="width: 56px; height: 56px; object-fit: cover; border-radius: 8px;">
-                            <div>
-                                <div class="fw-semibold">Points image</div>
-                                <div class="text-muted small">Image next to the checklist.</div>
-                            </div>
-                        </div>
-                        <label class="form-label" for="detail_feature_image_file">Upload Points Image</label>
-                        <input
-                            id="detail_feature_image_file"
-                            name="detail_feature_image_file"
-                            type="file"
-                            class="form-control @error('detail_feature_image_file') is-invalid @enderror"
-                            accept="image/*"
-                        >
-                        @error('detail_feature_image_file')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label" for="detail_feature_points_lines">Checklist points (one per line)</label>
-                        <textarea
-                            id="detail_feature_points_lines"
-                            name="detail_feature_points_lines"
-                            rows="5"
-                            class="form-control @error('detail_feature_points_lines') is-invalid @enderror"
-                            placeholder="Scenario comparisons\nRisk stratification\nShared planning assumptions"
-                        >{{ old('detail_feature_points_lines', $detailFeaturePointsLines) }}</textarea>
-                        @error('detail_feature_points_lines')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+                <div class="mb-3">
+                    <label class="form-label" for="detail_gallery_image_1_caption">Content Image Caption (Figure)</label>
+                    <textarea
+                        id="detail_gallery_image_1_caption"
+                        name="detail_gallery_image_1_caption"
+                        rows="3"
+                        class="form-control @error('detail_gallery_image_1_caption') is-invalid @enderror"
+                        placeholder="Figure 1. ..."
+                    >{{ old('detail_gallery_image_1_caption', $isEdit ? ($post->detail_gallery_image_1_caption ?? '') : '') }}</textarea>
+                    @error('detail_gallery_image_1_caption')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="row">
@@ -579,3 +403,73 @@
         </div>
     </div>
 </div>
+
+<script>
+    (function () {
+        const container = document.getElementById('contentSectionsContainer');
+        const addBtn = document.getElementById('addContentSectionBtn');
+        const template = document.getElementById('contentSectionTemplate');
+
+        if (!container || !addBtn || !template) return;
+
+        function currentMaxIndex() {
+            const items = container.querySelectorAll('.content-section-item');
+            let max = -1;
+            items.forEach((el) => {
+                const idx = parseInt(el.getAttribute('data-index') || '-1', 10);
+                if (!Number.isNaN(idx)) max = Math.max(max, idx);
+            });
+            return max;
+        }
+
+        function refreshNumbers() {
+            const items = container.querySelectorAll('.content-section-item');
+            items.forEach((el, i) => {
+                const title = el.querySelector('.fw-semibold');
+                if (title) title.textContent = `Section ${i + 1}`;
+            });
+        }
+
+        function hideEmptyHint() {
+            const hint = document.getElementById('noContentSectionsHint');
+            if (hint) hint.remove();
+        }
+
+        addBtn.addEventListener('click', function () {
+            hideEmptyHint();
+
+            const newIndex = currentMaxIndex() + 1;
+            const html = template.innerHTML
+                .replaceAll('__INDEX__', String(newIndex))
+                .replaceAll('__NUMBER__', String(newIndex + 1));
+
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = html.trim();
+            const node = wrapper.firstElementChild;
+            if (!node) return;
+
+            container.appendChild(node);
+            refreshNumbers();
+        });
+
+        container.addEventListener('click', function (e) {
+            const target = e.target;
+            if (!(target instanceof HTMLElement)) return;
+            if (!target.classList.contains('removeContentSectionBtn')) return;
+
+            const item = target.closest('.content-section-item');
+            if (item) item.remove();
+
+            const remaining = container.querySelectorAll('.content-section-item').length;
+            if (remaining === 0) {
+                const hint = document.createElement('div');
+                hint.className = 'text-muted';
+                hint.id = 'noContentSectionsHint';
+                hint.textContent = 'Belum ada section. Klik “Add Section” untuk menambah.';
+                container.appendChild(hint);
+            }
+
+            refreshNumbers();
+        });
+    })();
+</script>

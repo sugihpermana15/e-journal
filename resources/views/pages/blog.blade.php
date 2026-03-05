@@ -233,23 +233,6 @@
                                 @endif
                             </ul>
                         </div>
-                        <div class="sidebar__single sidebar__tags">
-                            <div class="sidebar__title-box">
-                                <div class="sidebar__title-shape"></div>
-                                <div class="sidebar__title-shape-2"></div>
-                                <h3 class="sidebar__title">Keywords</h3>
-                            </div>
-                            <div class="sidebar__tags-list">
-                                @foreach($blogSidebarKeywords as $kw)
-                                    @php
-                                        $kw = trim((string) $kw);
-                                    @endphp
-                                    @if($kw !== '')
-                                        <a href="#">{{ $kw }}</a>
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
                         <div class="sidebar__single sidebar__subscribe">
                             <div class="sidebar__title-box">
                                 <div class="sidebar__title-shape"></div>
