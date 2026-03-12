@@ -108,7 +108,11 @@
     $blogTagline = (string) data_get($home, 'blog.tagline', 'OUR INSIGHT');
     $blogHeadingHtml = data_get($home, 'blog.heading_html');
     $blogButtonText = (string) data_get($home, 'blog.button_text', 'View All Scientific News');
-    $blogButtonUrl = (string) data_get($home, 'blog.button_url', route('blog'));
+    $blogButtonText = trim($blogButtonText) !== '' ? $blogButtonText : 'View All Scientific News';
+    if (strcasecmp(trim($blogButtonText), 'View All Blogs') === 0) {
+        $blogButtonText = 'View All Scientific News';
+    }
+    $blogButtonUrl = route('blog');
 @endphp
 
 <x-strickyHeader />
