@@ -1054,7 +1054,9 @@
                         $linkUrl = (string) data_get($t, 'link_url', route('about'));
                         $imgRaw = data_get($t, 'image');
                         $defaultIndex = min(((int) $i) + 1, 4);
-                        $imgUrl = $imgRaw ? asset('storage/' . ltrim($imgRaw, '/')) : asset('assets/images/testimonial/testimonial-1-' . $defaultIndex . '.jpg');
+                        $imgUrl = $imgRaw
+                            ? asset('storage/' . ltrim($imgRaw, '/'))
+                            : app('avatar')->create($name !== '' ? $name : 'Med Open Press')->toBase64();
                     @endphp
                     <li>
                         <div class="testimonial-one__single">
@@ -1067,7 +1069,7 @@
                                     <p class="testimonial-one__client-sub-title">{{ $role }}</p>
                                 </div>
                                 <div class="testimonial-one__client-img">
-                                    <img src="{{ $imgUrl }}" alt="">
+                                    <img src="{{ $imgUrl }}" alt="{{ e($name) }}" style="width: 100%; height: 100%; object-fit: contain;">
                                 </div>
                             </div>
                             @if($subTitle !== '')
@@ -1098,7 +1100,7 @@
                             <p class="testimonial-one__client-sub-title">Business Owner</p>
                         </div>
                         <div class="testimonial-one__client-img">
-                            <img src="{{ asset('assets/images/testimonial/testimonial-1-1.jpg') }}" alt="">
+                            <img src="{{ app('avatar')->create('Emily Carter')->toBase64() }}" alt="Emily Carter" style="width: 100%; height: 100%; object-fit: contain;">
                         </div>
                     </div>
                     <span class="testimonial-one__sub-title">Rigorous and transparent!</span>
@@ -1128,7 +1130,7 @@
                             <p class="testimonial-one__client-sub-title">Financial Analyst</p>
                         </div>
                         <div class="testimonial-one__client-img">
-                            <img src="{{ asset('assets/images/testimonial/testimonial-1-2.jpg') }}" alt="">
+                            <img src="{{ app('avatar')->create('Michael Brown')->toBase64() }}" alt="Michael Brown" style="width: 100%; height: 100%; object-fit: contain;">
                         </div>
                     </div>
                     <span class="testimonial-one__sub-title">Efficient and dependable!</span>
@@ -1158,7 +1160,7 @@
                             <p class="testimonial-one__client-sub-title">Marketing Manager</p>
                         </div>
                         <div class="testimonial-one__client-img">
-                            <img src="{{ asset('assets/images/testimonial/testimonial-1-3.jpg') }}" alt="">
+                            <img src="{{ app('avatar')->create('Sarah Thompson')->toBase64() }}" alt="Sarah Thompson" style="width: 100%; height: 100%; object-fit: contain;">
                         </div>
                     </div>
                     <span class="testimonial-one__sub-title">High-quality editorial support!</span>
@@ -1188,7 +1190,7 @@
                             <p class="testimonial-one__client-sub-title">Software Developer </p>
                         </div>
                         <div class="testimonial-one__client-img">
-                            <img src="{{ asset('assets/images/testimonial/testimonial-1-4.jpg') }}" alt="">
+                            <img src="{{ app('avatar')->create('John Peterson')->toBase64() }}" alt="John Peterson" style="width: 100%; height: 100%; object-fit: contain;">
                         </div>
                     </div>
                     <span class="testimonial-one__sub-title">A great publishing partner!</span>

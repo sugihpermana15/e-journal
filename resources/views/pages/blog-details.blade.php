@@ -20,7 +20,14 @@
     $blogDetailTitle = (string) data_get($postDetail, 'title', (string) data_get($blogDetail, 'title', 'Scientific News: How AI “Digital Twins” Support Surgical Planning'));
     $blogDetailAuthor = (string) data_get($postDetail, 'author', (string) data_get($blogDetail, 'author', 'Med Open Press Editorial'));
     $blogDetailPublished = (string) data_get($postDetail, 'published', (string) data_get($blogDetail, 'published', 'February 15, 2026'));
-    $blogDetailAuthorImage = (string) data_get($postDetail, 'author_image', 'assets/images/resources/logoMed.png');
+    $blogDetailAuthorImageRaw = trim((string) data_get($postDetail, 'author_image', ''));
+    $blogDetailAuthorImageIsPlaceholder = $blogDetailAuthorImageRaw === ''
+        || $blogDetailAuthorImageRaw === 'assets/images/blog/blog-details-meta-client-img-1.jpg'
+        || $blogDetailAuthorImageRaw === 'assets/images/blog/blog-list-client-img-1.jpg'
+        || $blogDetailAuthorImageRaw === 'assets/images/resources/logoMed.png';
+    $blogDetailAuthorImageSrc = $blogDetailAuthorImageIsPlaceholder
+        ? app('avatar')->create($blogDetailAuthor !== '' ? $blogDetailAuthor : 'Med Open Press')->toBase64()
+        : asset($blogDetailAuthorImageRaw);
     $blogDetailContent = (string) data_get($postDetail, 'content', '');
     $currentSlug = trim((string) data_get($postDetail, 'slug', ''));
 
@@ -71,7 +78,7 @@
                                 <ul class="blog-details__meta-list list-unstyled">
                                     <li>
                                         <div class="blog-details__meta-img">
-                                                    <img src="{{ asset($blogDetailAuthorImage) }}" alt="{{ $blogDetailAuthor }}" style="width: 100%; height: 100%; object-fit: contain;">
+                                                    <img src="{{ $blogDetailAuthorImageSrc }}" alt="{{ $blogDetailAuthor }}" style="width: 100%; height: 100%; object-fit: contain;">
                                         </div>
                                         <div class="content">
                                             <span>Post By</span>

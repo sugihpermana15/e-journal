@@ -21,7 +21,7 @@
                             <ul class="blog-details__meta-list list-unstyled">
                                 <li>
                                     <div class="blog-details__meta-img">
-                                        <img src="{{ asset('assets/images/resources/logoMed.png') }}" alt="Med Open Press" style="width: 100%; height: 100%; object-fit: contain;">
+                                        <img src="{{ app('avatar')->create((string) ($category['author'] ?? 'Med Open Press'))->toBase64() }}" alt="{{ e($category['author'] ?? 'Med Open Press') }}" style="width: 100%; height: 100%; object-fit: contain;">
                                     </div>
                                     <div class="content">
                                         <span>Post By</span>

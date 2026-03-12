@@ -72,7 +72,13 @@
                                         </div>
                                         <div class="blog-list__client-info">
                                             <div class="blog-list__client-img">
-                                                <img src="{{ asset($post['author_image']) }}" alt="">
+                                                @php
+                                                    $authorName = (string) data_get($post, 'author', 'Med Open Press');
+                                                    $authorImageRaw = trim((string) data_get($post, 'author_image', ''));
+                                                    $authorImageIsPlaceholder = $authorImageRaw === '' || $authorImageRaw === 'assets/images/blog/blog-list-client-img-1.jpg' || $authorImageRaw === 'assets/images/blog/blog-details-meta-client-img-1.jpg';
+                                                    $authorImageSrc = $authorImageIsPlaceholder ? app('avatar')->create($authorName)->toBase64() : asset($authorImageRaw);
+                                                @endphp
+                                                <img src="{{ $authorImageSrc }}" alt="{{ e($authorName) }}" style="width: 100%; height: 100%; object-fit: contain;">
                                             </div>
                                             <div class="blog-list__client-content">
                                                 <span>Post By</span>
@@ -119,7 +125,7 @@
                                     </div>
                                     <div class="blog-list__client-info">
                                         <div class="blog-list__client-img">
-                                            <img src="{{ asset('assets/images/blog/blog-list-client-img-1.jpg') }}" alt="">
+                                            <img src="{{ app('avatar')->create('Med Open Press')->toBase64() }}" alt="Med Open Press" style="width: 100%; height: 100%; object-fit: contain;">
                                         </div>
                                         <div class="blog-list__client-content">
                                             <span>Status</span>
