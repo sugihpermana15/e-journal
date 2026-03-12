@@ -48,12 +48,6 @@
                                                             </div>
                                                             <p>{{ $post['published'] }}</p>
                                                         </li>
-                                                        <li>
-                                                            <div class="icon">
-                                                                <span class="icon-bubble-chat"></span>
-                                                            </div>
-                                                            <p>{{ $post['comments'] }}</p>
-                                                        </li>
                                                     </ul>
                                                     <div class="blog-list__tag">
                                                         @foreach(($post['tags'] ?? []) as $tag)
@@ -107,12 +101,6 @@
                                                         <span class="icon-calendar"></span>
                                                     </div>
                                                     <p>—</p>
-                                                </li>
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-bubble-chat"></span>
-                                                    </div>
-                                                    <p>0 Comments</p>
                                                 </li>
                                             </ul>
                                             <div class="blog-list__tag">
