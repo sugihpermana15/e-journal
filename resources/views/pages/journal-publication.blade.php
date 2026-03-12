@@ -1,5 +1,5 @@
 @extends('layouts.breadcrumbs')
-@section('title', 'Scientific Journal Publication || Med Open Press')
+@section('title', 'Scientific Journal Publication')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/css/module-css/services.css') }}?v={{ filemtime(public_path('assets/css/module-css/services.css')) }}"/>
     <link rel="stylesheet" href="{{asset('assets/css/module-css/project.css')}}"/>

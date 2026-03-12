@@ -1,5 +1,5 @@
 @extends('layouts.breadcrumbs')
-@section('title', 'Scientific News Carousel || Med Open Press')
+@section('title', 'Scientific News Carousel')
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/css/module-css/blog.css') }}?v={{ filemtime(public_path('assets/css/module-css/blog.css')) }}"/>
 @endpush

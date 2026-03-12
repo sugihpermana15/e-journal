@@ -1,5 +1,5 @@
 @extends('layouts.breadcrumbs')
-@section('title', 'Pricing || Med Open Press')
+@section('title', 'Pricing')
 @push('styles')
 <link rel="stylesheet" href="{{asset('assets/css/module-css/pricing.css')}}"/>
 @endpush

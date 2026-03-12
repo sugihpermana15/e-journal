@@ -1,5 +1,5 @@
 @extends('layouts.breadcrumbs')
-@section('title', ($category['label'] ?? 'Scientific News Category') . ' || Med Open Press')
+@section('title', ($category['label'] ?? 'Scientific News Category'))
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/css/module-css/blog.css') }}?v={{ filemtime(public_path('assets/css/module-css/blog.css')) }}"/>
 @endpush
@@ -15,17 +15,13 @@
             <div class="row">
                 <div class="col-xl-8 col-lg-7">
                     <div class="blog-details__left">
-                        <div class="blog-details__img">
-                            <img src="{{ asset($category['hero'] ?? 'assets/images/blog/blog-details-img-1.jpg') }}" alt="">
-                        </div>
-
                         <div class="blog-details__content">
                             <h3 class="blog-details__title">{{ $category['label'] ?? 'Scientific News Category' }}</h3>
 
                             <ul class="blog-details__meta-list list-unstyled">
                                 <li>
                                     <div class="blog-details__meta-img">
-                                        <img src="{{ asset('assets/images/blog/blog-details-meta-client-img-1.jpg') }}" alt="">
+                                        <img src="{{ asset('assets/images/resources/logoMed.png') }}" alt="Med Open Press" style="width: 100%; height: 100%; object-fit: contain;">
                                     </div>
                                     <div class="content">
                                         <span>Post By</span>
@@ -194,33 +190,48 @@
                                     <h3 class="sidebar__title">Recent Post</h3>
                                 </div>
                                 <ul class="sidebar__post-list list-unstyled">
-                                    <li>
-                                        <div class="sidebar__post-image">
-                                            <img src="{{ asset('assets/images/blog/lp-1-1.jpg') }}" alt="">
-                                        </div>
-                                        <div class="sidebar__post-content">
-                                            <h3><a href="{{ route('blog-category', ['category' => 'cardiology']) }}">Cardiology</a></h3>
-                                            <p class="sidebar__post-date"><span class="icon-calendar"></span>February 2026</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="sidebar__post-image">
-                                            <img src="{{ asset('assets/images/blog/lp-1-2.jpg') }}" alt="">
-                                        </div>
-                                        <div class="sidebar__post-content">
-                                            <h3><a href="{{ route('blog-category', ['category' => 'orthopedics']) }}">Orthopedics</a></h3>
-                                            <p class="sidebar__post-date"><span class="icon-calendar"></span>February 2026</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="sidebar__post-image">
-                                            <img src="{{ asset('assets/images/blog/lp-1-3.jpg') }}" alt="">
-                                        </div>
-                                        <div class="sidebar__post-content">
-                                            <h3><a href="{{ route('blog-category', ['category' => 'internal-medicine']) }}">Internal Medicine</a></h3>
-                                            <p class="sidebar__post-date"><span class="icon-calendar"></span>February 2026</p>
-                                        </div>
-                                    </li>
+                                    @php
+                                        $recentPosts = array_slice((array) ($posts ?? []), 0, 3);
+                                    @endphp
+
+                                    @forelse($recentPosts as $post)
+                                        @php
+                                            $url = trim((string) data_get($post, 'link_url', ''));
+                                            if ($url === '') {
+                                                $category = trim((string) data_get($post, 'category', ''));
+                                                $url = $category !== ''
+                                                    ? route('blog-category', ['category' => $category])
+                                                    : route('blog-details');
+                                            }
+
+                                            $image = (string) data_get($post, 'image', 'assets/images/resources/logoMed.png');
+                                            $title = (string) data_get($post, 'title', '');
+                                            $published = (string) data_get($post, 'published', '');
+                                        @endphp
+                                        <li>
+                                            <div class="sidebar__post-image">
+                                                <img src="{{ asset($image) }}" alt="{{ e($title) }}">
+                                            </div>
+                                            <div class="sidebar__post-content">
+                                                <h3>
+                                                    <a href="{{ $url }}">{{ $title }}</a>
+                                                </h3>
+                                                <p class="sidebar__post-date"><span class="icon-calendar"></span>{{ $published }}</p>
+                                            </div>
+                                        </li>
+                                    @empty
+                                        <li>
+                                            <div class="sidebar__post-image">
+                                                <img src="{{ asset('assets/images/resources/logoMed.png') }}" alt="Med Open Press">
+                                            </div>
+                                            <div class="sidebar__post-content">
+                                                <h3>
+                                                    <a href="#">Belum ada postingan</a>
+                                                </h3>
+                                                <p class="sidebar__post-date"><span class="icon-calendar"></span>—</p>
+                                            </div>
+                                        </li>
+                                    @endforelse
                                 </ul>
                             </div>
                         </div>

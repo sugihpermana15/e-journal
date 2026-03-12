@@ -1,5 +1,5 @@
 @extends('layouts.breadcrumbs')
-@section('title', 'Scientific News || Med Open Press')
+@section('title', 'Scientific News')
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/css/module-css/blog.css') }}?v={{ filemtime(public_path('assets/css/module-css/blog.css')) }}"/>
 @endpush
@@ -57,7 +57,7 @@
                                         </ul>
                                         <div class="blog-list__tag">
                                             @foreach(($post['tags'] ?? []) as $tag)
-                                                <a href="#">#{{ str_replace(' ', '', $tag) }}</a>
+                                                <a href="#"># {{ $tag }}</a>
                                             @endforeach
                                         </div>
                                     </div>
@@ -106,7 +106,7 @@
                                         </li>
                                     </ul>
                                     <div class="blog-list__tag">
-                                        <a href="#">#ScientificNews</a>
+                                        <a href="#"># Scientific News</a>
                                     </div>
                                 </div>
                             </div>

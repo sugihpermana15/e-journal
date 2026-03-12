@@ -227,27 +227,6 @@
             </div>
             <div class="card-body">
                 <div class="mb-3">
-                    <div class="d-flex align-items-center gap-2 mb-2">
-                        <img src="{{ $gallery1Url }}" alt="" style="width: 56px; height: 56px; object-fit: cover; border-radius: 8px;">
-                        <div>
-                            <div class="fw-semibold">Content image</div>
-                            <div class="text-muted small">Shown inside the article body (single image).</div>
-                        </div>
-                    </div>
-                    <label class="form-label" for="detail_gallery_image_1_file">Upload Content Image</label>
-                    <input
-                        id="detail_gallery_image_1_file"
-                        name="detail_gallery_image_1_file"
-                        type="file"
-                        class="form-control @error('detail_gallery_image_1_file') is-invalid @enderror"
-                        accept="image/*"
-                    >
-                    @error('detail_gallery_image_1_file')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
                     <label class="form-label" for="detail_gallery_image_1_caption">Content Image Caption (Figure)</label>
                     <textarea
                         id="detail_gallery_image_1_caption"

@@ -1,5 +1,5 @@
 @extends('layouts.layout1')
-@section('title', 'Home || Med Open Press')
+@section('title', 'Home')
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/css/module-css/services.css') }}?v={{ filemtime(public_path('assets/css/module-css/services.css')) }}" />
 <link rel="stylesheet" href="{{ asset('assets/css/module-css/project.css') }}" />

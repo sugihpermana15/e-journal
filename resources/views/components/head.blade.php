@@ -5,14 +5,17 @@
         $appName = (string) config('app.name', 'E-Journal');
 
         $pageTitleRaw = trim($__env->yieldContent('title'));
-        $pageTitle = $pageTitleRaw !== '' ? ($pageTitleRaw . ' || ' . $appName) : $appName;
+        $pageTitleHasBrand = $pageTitleRaw !== '' && stripos($pageTitleRaw, $appName) !== false;
+        $pageTitle = $pageTitleRaw === ''
+            ? $appName
+            : ($pageTitleHasBrand ? $pageTitleRaw : ($appName . ' - ' . $pageTitleRaw));
 
         $headerSettings = (array) \App\Models\Ejournal\Setting::getValue('header', []);
         $faviconPath = data_get($headerSettings, 'favicon_path');
         $faviconUrl = $faviconPath ? asset('storage/' . ltrim($faviconPath, '/')) : null;
 
         $routeName = request()->route()?->getName();
-        $pageTitlePlain = $pageTitleRaw !== '' ? $pageTitleRaw : $appName;
+        $pageTitlePlain = $pageTitle;
 
         $defaultDescriptions = [
             'index' => 'Med Open Press provides end-to-end medical publishing services, journal support, and scientific news updates.',

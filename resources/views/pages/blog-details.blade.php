@@ -1,5 +1,4 @@
 @extends('layouts.breadcrumbs')
-@section('title', 'Scientific News Details || Med Open Press')
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/css/module-css/blog.css') }}?v={{ filemtime(public_path('assets/css/module-css/blog.css')) }}"/>
 @endpush
@@ -21,7 +20,7 @@
     $blogDetailTitle = (string) data_get($postDetail, 'title', (string) data_get($blogDetail, 'title', 'Scientific News: How AI “Digital Twins” Support Surgical Planning'));
     $blogDetailAuthor = (string) data_get($postDetail, 'author', (string) data_get($blogDetail, 'author', 'Med Open Press Editorial'));
     $blogDetailPublished = (string) data_get($postDetail, 'published', (string) data_get($blogDetail, 'published', 'February 15, 2026'));
-    $blogDetailAuthorImage = (string) data_get($postDetail, 'author_image', 'assets/images/blog/blog-details-meta-client-img-1.jpg');
+    $blogDetailAuthorImage = (string) data_get($postDetail, 'author_image', 'assets/images/resources/logoMed.png');
     $blogDetailContent = (string) data_get($postDetail, 'content', '');
     $currentSlug = trim((string) data_get($postDetail, 'slug', ''));
 
@@ -42,7 +41,15 @@
     $shareLinkedinUrl = trim((string) data_get($postDetail, 'share_linkedin_url', ''));
     $shareInstagramUrl = trim((string) data_get($postDetail, 'share_instagram_url', ''));
     $shareFacebookUrl = trim((string) data_get($postDetail, 'share_facebook_url', ''));
+
+    $seoTitle = $blogDetailTitle !== '' ? $blogDetailTitle : 'Scientific News Details';
+    $seoText = trim(strip_tags($blogDetailContent));
+    $seoDescription = $seoText !== '' ? \Illuminate\Support\Str::limit($seoText, 155) : 'Scientific News details and article insights.';
+    $seoImage = asset($blogDetailHero);
 @endphp
+@section('title', $seoTitle)
+@section('meta_description', $seoDescription)
+@section('meta_image', $seoImage)
 @section('content')
 
         <!--Blog Details Start-->
@@ -52,14 +59,19 @@
                     <div class="col-xl-8 col-lg-7">
                         <div class="blog-details__left">
                             <div class="blog-details__img">
-                                <img src="{{ asset($blogDetailHero) }}" alt="">
+                                <img src="{{ asset($blogDetailHero) }}" alt="{{ $blogDetailTitle }}">
                             </div>
+                            @if($contentImageCaption !== '')
+                                <div class="blog-details__text-1 mt-2">
+                                    {!! nl2br(e($contentImageCaption)) !!}
+                                </div>
+                            @endif
                             <div class="blog-details__content">
                                 <h3 class="blog-details__title">{{ $blogDetailTitle }}</h3>
                                 <ul class="blog-details__meta-list list-unstyled">
                                     <li>
                                         <div class="blog-details__meta-img">
-                                            <img src="{{ asset($blogDetailAuthorImage) }}" alt="">
+                                                    <img src="{{ asset($blogDetailAuthorImage) }}" alt="{{ $blogDetailAuthor }}" style="width: 100%; height: 100%; object-fit: contain;">
                                         </div>
                                         <div class="content">
                                             <span>Post By</span>
@@ -78,21 +90,6 @@
                                 </ul>
                                 @if(trim($blogDetailContent) !== '')
                                     <div class="blog-details__text-1">{!! nl2br(e($blogDetailContent)) !!}</div>
-                                @endif
-
-                                @if($contentImage !== '')
-                                    <div class="blog-details__img-box">
-                                        <figure class="m-0">
-                                            <div class="blog-details__img-box-img-1">
-                                                <img src="{{ asset($contentImage) }}" alt="">
-                                            </div>
-                                            @if($contentImageCaption !== '')
-                                                <figcaption class="blog-details__text-1 mt-2">
-                                                    {!! nl2br(e($contentImageCaption)) !!}
-                                                </figcaption>
-                                            @endif
-                                        </figure>
-                                    </div>
                                 @endif
 
                                 @foreach($sections as $section)

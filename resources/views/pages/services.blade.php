@@ -1,5 +1,5 @@
 @extends('layouts.breadcrumbs')
-@section('title', 'Publishing Services || Med Open Press')
+@section('title', 'Publishing Services')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/css/module-css/services.css') }}?v={{ filemtime(public_path('assets/css/module-css/services.css')) }}" />
