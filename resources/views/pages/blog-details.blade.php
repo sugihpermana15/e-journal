@@ -26,7 +26,10 @@
         || $blogDetailAuthorImageRaw === 'assets/images/blog/blog-list-client-img-1.jpg'
         || $blogDetailAuthorImageRaw === 'assets/images/resources/logoMed.png';
     $blogDetailAuthorImageSrc = $blogDetailAuthorImageIsPlaceholder
-        ? app('avatar')->create($blogDetailAuthor !== '' ? $blogDetailAuthor : 'Med Open Press')->toBase64()
+        ? app('avatar')->create($blogDetailAuthor !== '' ? $blogDetailAuthor : 'Med Open Press')
+            ->setShape('square')
+            ->setBorder(0, 'background', 8)
+            ->toBase64()
         : asset($blogDetailAuthorImageRaw);
     $blogDetailContent = (string) data_get($postDetail, 'content', '');
     $currentSlug = trim((string) data_get($postDetail, 'slug', ''));
@@ -78,7 +81,7 @@
                                 <ul class="blog-details__meta-list list-unstyled">
                                     <li>
                                         <div class="blog-details__meta-img">
-                                                    <img src="{{ $blogDetailAuthorImageSrc }}" alt="{{ $blogDetailAuthor }}" style="width: 100%; height: 100%; object-fit: contain;">
+                                                    <img src="{{ $blogDetailAuthorImageSrc }}" alt="{{ $blogDetailAuthor }}">
                                         </div>
                                         <div class="content">
                                             <span>Post By</span>

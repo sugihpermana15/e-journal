@@ -78,9 +78,11 @@
                                                             $authorName = (string) data_get($post, 'author', 'Med Open Press');
                                                             $authorImageRaw = trim((string) data_get($post, 'author_image', ''));
                                                             $authorImageIsPlaceholder = $authorImageRaw === '' || $authorImageRaw === 'assets/images/blog/blog-list-client-img-1.jpg' || $authorImageRaw === 'assets/images/blog/blog-details-meta-client-img-1.jpg';
-                                                            $authorImageSrc = $authorImageIsPlaceholder ? app('avatar')->create($authorName)->toBase64() : asset($authorImageRaw);
+                                                            $authorImageSrc = $authorImageIsPlaceholder
+                                                                ? app('avatar')->create($authorName)->setShape('square')->setBorder(0, 'background')->toBase64()
+                                                                : asset($authorImageRaw);
                                                         @endphp
-                                                        <img src="{{ $authorImageSrc }}" alt="{{ e($authorName) }}" style="width: 100%; height: 100%; object-fit: contain;">
+                                                        <img src="{{ $authorImageSrc }}" alt="{{ e($authorName) }}">
                                                     </div>
                                                     <div class="blog-list__client-content">
                                                         <span>Post By</span>
@@ -127,7 +129,7 @@
                                             </div>
                                             <div class="blog-list__client-info">
                                                 <div class="blog-list__client-img">
-                                                    <img src="{{ app('avatar')->create('Med Open Press')->toBase64() }}" alt="Med Open Press" style="width: 100%; height: 100%; object-fit: contain;">
+                                                    <img src="{{ app('avatar')->create('Med Open Press')->setShape('square')->setBorder(0, 'background')->toBase64() }}" alt="Med Open Press">
                                                 </div>
                                                 <div class="blog-list__client-content">
                                                     <span>Status</span>
